@@ -13,7 +13,7 @@ class CreateClientsTable extends Migration
      */
     public function up()
     {
-        // Create table to store clients
+        // Create table to store Business Profile
         Schema::create('clients', function (Blueprint $table) {
             $table->increments('id');
             $table->string('name');
