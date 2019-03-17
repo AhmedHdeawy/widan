@@ -22,7 +22,7 @@ class ClientController extends Controller
     public function index()
     {
         $clients = Client::with(['services', 'likes', 'dislikes', 'pictures', 'users', 'categories'])
-                    ->latest()->paginate(3);
+                    ->latest()->paginate(10);
         return $clients;
     }
 

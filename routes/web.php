@@ -2,12 +2,14 @@
 
 /*
 |--------------------------------------------------------------------------
-| Web Routes
+| Auth
 |--------------------------------------------------------------------------
 |
-| Here is where you can register web routes for your application. These
-| routes are loaded by the RouteServiceProvider within a group which
-| contains the "web" middleware group. Now create something great!
+| USER 		=>	auth()->user()
+|
+| ADMIN		=>	auth()->guard('admin')->user()
+\
+\ CLIENT 	=>	auth()->guard('client')->user()
 |
 */
 
@@ -18,8 +20,14 @@ Auth::routes();
 Route::get('/', 'HomeController@index')->name('home');
 
 
+// Admin Login Routes
+Route::get('admin-login', ['as'=>'admin-login-form', 'uses'=>'Auth\AdminLoginController@showLoginForm']);
+Route::post('admin-login', ['as'=>'admin-login','uses'=>'Auth\AdminLoginController@login']);
+Route::post('admin-logout', ['as'=>'admin-logout','uses'=>'Auth\AdminLoginController@logout']);
+
+
 // Dashboard Routes
-Route::group([ 'prefix'	=>	'dashboard', 'middleware'  =>  'auth' ], function(){
+Route::group([ 'prefix'	=>	'dashboard', 'middleware'  =>  'admin' ], function(){
 
 	Route::get('/', 'Dashboard\DashboardController@index')->name('dashboard');
 

@@ -70407,377 +70407,349 @@ var render = function() {
   var _c = _vm._self._c || _h
   return _c("div", { staticClass: "container" }, [
     _c("div", { staticClass: "row" }, [
-      _c(
-        "div",
-        { staticClass: "col-md-12 mt-5" },
-        [
-          _c("HereMap", {
-            attrs: {
-              appId: "lTKYqDGmQqHJQhh8ywev",
-              appCode: "cORsPx29dAUUQFHmGseeiA",
-              lat: "37.7397",
-              lng: "-121.4252",
-              width: "80%",
-              height: "500px",
-              location: "Cairo"
-            }
-          }),
-          _vm._v(" "),
-          _vm.spinner
-            ? _c(
-                "div",
-                { staticClass: "text-center" },
-                [
-                  _c("bounce-loader", {
-                    attrs: { loading: true, color: "#9EDCC0", size: "150px" }
-                  })
-                ],
-                1
-              )
-            : _c("div", { staticClass: "card" }, [
-                _c("div", { staticClass: "card-header" }, [
-                  _c("h3", { staticClass: "card-title" }, [
-                    _vm._v("Clients List")
-                  ]),
-                  _vm._v(" "),
-                  _c("div", { staticClass: "card-tools" }, [
+      _c("div", { staticClass: "col-md-12 mt-5" }, [
+        _vm.spinner
+          ? _c(
+              "div",
+              { staticClass: "text-center" },
+              [
+                _c("bounce-loader", {
+                  attrs: { loading: true, color: "#9EDCC0", size: "150px" }
+                })
+              ],
+              1
+            )
+          : _c("div", { staticClass: "card" }, [
+              _c("div", { staticClass: "card-header" }, [
+                _c("h3", { staticClass: "card-title" }, [
+                  _vm._v("Clients List")
+                ]),
+                _vm._v(" "),
+                _c("div", { staticClass: "card-tools" }, [
+                  _c(
+                    "button",
+                    {
+                      staticClass: "btn btn-success",
+                      on: {
+                        click: function($event) {
+                          _vm.openNewModal()
+                        }
+                      }
+                    },
+                    [
+                      _vm._v(
+                        "\n                    Add New Client\n                "
+                      )
+                    ]
+                  )
+                ])
+              ]),
+              _vm._v(" "),
+              _vm.clients.data.length > 0
+                ? _c("div", { staticClass: "card-body table-responsive p-0" }, [
+                    _c("table", { staticClass: "table table-hover" }, [
+                      _c(
+                        "tbody",
+                        [
+                          _c("tr", [
+                            _c("th", [
+                              _c("input", {
+                                directives: [
+                                  {
+                                    name: "model",
+                                    rawName: "v-model",
+                                    value: _vm.isCheckAll,
+                                    expression: "isCheckAll"
+                                  }
+                                ],
+                                staticClass: "form-check-input",
+                                attrs: { type: "checkbox" },
+                                domProps: {
+                                  checked: Array.isArray(_vm.isCheckAll)
+                                    ? _vm._i(_vm.isCheckAll, null) > -1
+                                    : _vm.isCheckAll
+                                },
+                                on: {
+                                  change: [
+                                    function($event) {
+                                      var $$a = _vm.isCheckAll,
+                                        $$el = $event.target,
+                                        $$c = $$el.checked ? true : false
+                                      if (Array.isArray($$a)) {
+                                        var $$v = null,
+                                          $$i = _vm._i($$a, $$v)
+                                        if ($$el.checked) {
+                                          $$i < 0 &&
+                                            (_vm.isCheckAll = $$a.concat([$$v]))
+                                        } else {
+                                          $$i > -1 &&
+                                            (_vm.isCheckAll = $$a
+                                              .slice(0, $$i)
+                                              .concat($$a.slice($$i + 1)))
+                                        }
+                                      } else {
+                                        _vm.isCheckAll = $$c
+                                      }
+                                    },
+                                    function($event) {
+                                      _vm.selectedItems()
+                                    }
+                                  ]
+                                }
+                              })
+                            ]),
+                            _vm._v(" "),
+                            _c("th", [_vm._v("ID")]),
+                            _vm._v(" "),
+                            _c("th", [_vm._v("Name")]),
+                            _vm._v(" "),
+                            _c("th", [_vm._v("Email")]),
+                            _vm._v(" "),
+                            _c("th", [_vm._v("Phone")]),
+                            _vm._v(" "),
+                            _c("th", { staticClass: "text-center" }, [
+                              _vm._v("Logo")
+                            ]),
+                            _vm._v(" "),
+                            _c("th", { staticClass: "text-center" }, [
+                              _vm._v("Status")
+                            ]),
+                            _vm._v(" "),
+                            _c("th", { staticClass: "text-center" }, [
+                              _vm._v("Pictures")
+                            ]),
+                            _vm._v(" "),
+                            _c("th", { staticClass: "text-center" }, [
+                              _vm._v("Services")
+                            ]),
+                            _vm._v(" "),
+                            _c("th", { staticClass: "text-center" }, [
+                              _vm._v("Action")
+                            ])
+                          ]),
+                          _vm._v(" "),
+                          _vm._l(_vm.clients.data, function(client, index) {
+                            return _c("tr", { key: client.id }, [
+                              _c("td", { staticClass: "text-center" }, [
+                                _c("input", {
+                                  directives: [
+                                    {
+                                      name: "model",
+                                      rawName: "v-model",
+                                      value: _vm.selected,
+                                      expression: "selected"
+                                    }
+                                  ],
+                                  staticClass: "form-check-input",
+                                  attrs: { type: "checkbox" },
+                                  domProps: {
+                                    value: client.id,
+                                    checked: Array.isArray(_vm.selected)
+                                      ? _vm._i(_vm.selected, client.id) > -1
+                                      : _vm.selected
+                                  },
+                                  on: {
+                                    change: [
+                                      function($event) {
+                                        var $$a = _vm.selected,
+                                          $$el = $event.target,
+                                          $$c = $$el.checked ? true : false
+                                        if (Array.isArray($$a)) {
+                                          var $$v = client.id,
+                                            $$i = _vm._i($$a, $$v)
+                                          if ($$el.checked) {
+                                            $$i < 0 &&
+                                              (_vm.selected = $$a.concat([$$v]))
+                                          } else {
+                                            $$i > -1 &&
+                                              (_vm.selected = $$a
+                                                .slice(0, $$i)
+                                                .concat($$a.slice($$i + 1)))
+                                          }
+                                        } else {
+                                          _vm.selected = $$c
+                                        }
+                                      },
+                                      function($event) {
+                                        _vm.updatecheckAll()
+                                      }
+                                    ]
+                                  }
+                                })
+                              ]),
+                              _vm._v(" "),
+                              _c("td", [_vm._v(_vm._s(client.id))]),
+                              _vm._v(" "),
+                              _c("td", [_vm._v(_vm._s(client.name))]),
+                              _vm._v(" "),
+                              _c("td", [_vm._v(_vm._s(client.email))]),
+                              _vm._v(" "),
+                              _c("td", [_vm._v(_vm._s(client.phone))]),
+                              _vm._v(" "),
+                              _c("td", { staticClass: "text-center" }, [
+                                _c("img", {
+                                  staticClass: "imgPreview img-fluid",
+                                  attrs: {
+                                    alt: "Upload",
+                                    src: "/img/clients/" + client.logo
+                                  }
+                                })
+                              ]),
+                              _vm._v(" "),
+                              _c(
+                                "td",
+                                { staticClass: "small bold text-center" },
+                                [
+                                  _c(
+                                    "b",
+                                    {
+                                      class:
+                                        client.status == "0" ? "red" : "green"
+                                    },
+                                    [
+                                      _vm._v(
+                                        "\n                    " +
+                                          _vm._s(
+                                            _vm.showStatus(client.status)
+                                          ) +
+                                          "\n                  "
+                                      )
+                                    ]
+                                  )
+                                ]
+                              ),
+                              _vm._v(" "),
+                              _c("td", { staticClass: "text-center" }, [
+                                _c(
+                                  "button",
+                                  {
+                                    staticClass: "btn btn-sm btn-warning",
+                                    attrs: { type: "button" },
+                                    on: {
+                                      click: function($event) {
+                                        _vm.showPicturesModal(client)
+                                      }
+                                    }
+                                  },
+                                  [
+                                    _vm._v(
+                                      "\n                    Pictures\n                  "
+                                    )
+                                  ]
+                                )
+                              ]),
+                              _vm._v(" "),
+                              _c(
+                                "td",
+                                { staticClass: "text-center" },
+                                [
+                                  _c(
+                                    "router-link",
+                                    {
+                                      staticClass: "btn btn-sm btn-warning",
+                                      attrs: {
+                                        to: "/dashboard/service/" + client.id
+                                      }
+                                    },
+                                    [
+                                      _vm._v(
+                                        "\n                    Services\n                  "
+                                      )
+                                    ]
+                                  )
+                                ],
+                                1
+                              ),
+                              _vm._v(" "),
+                              _c("td", { staticClass: "text-center" }, [
+                                _c(
+                                  "button",
+                                  {
+                                    staticClass: "btn btn-sm btn-success",
+                                    attrs: { type: "button" },
+                                    on: {
+                                      click: function($event) {
+                                        _vm.showClientModal(client, index)
+                                      }
+                                    }
+                                  },
+                                  [_c("i", { staticClass: "fa fa-eye" })]
+                                ),
+                                _vm._v(" "),
+                                _c(
+                                  "button",
+                                  {
+                                    staticClass: "btn btn-sm btn-primary",
+                                    attrs: { type: "button" },
+                                    on: {
+                                      click: function($event) {
+                                        _vm.openUpdateModal(client, index)
+                                      }
+                                    }
+                                  },
+                                  [_c("i", { staticClass: "fa fa-edit" })]
+                                ),
+                                _vm._v(" "),
+                                _c(
+                                  "button",
+                                  {
+                                    staticClass: "btn btn-sm btn-danger",
+                                    attrs: { type: "button" },
+                                    on: {
+                                      click: function($event) {
+                                        _vm.deleteClient(client)
+                                      }
+                                    }
+                                  },
+                                  [_c("i", { staticClass: "fa fa-trash" })]
+                                )
+                              ])
+                            ])
+                          })
+                        ],
+                        2
+                      )
+                    ])
+                  ])
+                : _vm._e(),
+              _vm._v(" "),
+              _c("div", { staticClass: "card-footer" }, [
+                _c("div", { staticClass: "row" }, [
+                  _c("div", { staticClass: "col-6 pl-0" }, [
                     _c(
                       "button",
                       {
-                        staticClass: "btn btn-success",
+                        staticClass: "btn btn-danger",
+                        attrs: { type: "button" },
                         on: {
                           click: function($event) {
-                            _vm.openNewModal()
+                            _vm.deleteSelected()
                           }
                         }
                       },
                       [
                         _vm._v(
-                          "\n                    Add New Client\n                "
+                          "\n                    Delete Selected\n                  "
                         )
                       ]
                     )
-                  ])
-                ]),
-                _vm._v(" "),
-                _vm.clients.data.length > 0
-                  ? _c(
-                      "div",
-                      { staticClass: "card-body table-responsive p-0" },
-                      [
-                        _c("table", { staticClass: "table table-hover" }, [
-                          _c(
-                            "tbody",
-                            [
-                              _c("tr", [
-                                _c("th", [
-                                  _c("input", {
-                                    directives: [
-                                      {
-                                        name: "model",
-                                        rawName: "v-model",
-                                        value: _vm.isCheckAll,
-                                        expression: "isCheckAll"
-                                      }
-                                    ],
-                                    staticClass: "form-check-input",
-                                    attrs: { type: "checkbox" },
-                                    domProps: {
-                                      checked: Array.isArray(_vm.isCheckAll)
-                                        ? _vm._i(_vm.isCheckAll, null) > -1
-                                        : _vm.isCheckAll
-                                    },
-                                    on: {
-                                      change: [
-                                        function($event) {
-                                          var $$a = _vm.isCheckAll,
-                                            $$el = $event.target,
-                                            $$c = $$el.checked ? true : false
-                                          if (Array.isArray($$a)) {
-                                            var $$v = null,
-                                              $$i = _vm._i($$a, $$v)
-                                            if ($$el.checked) {
-                                              $$i < 0 &&
-                                                (_vm.isCheckAll = $$a.concat([
-                                                  $$v
-                                                ]))
-                                            } else {
-                                              $$i > -1 &&
-                                                (_vm.isCheckAll = $$a
-                                                  .slice(0, $$i)
-                                                  .concat($$a.slice($$i + 1)))
-                                            }
-                                          } else {
-                                            _vm.isCheckAll = $$c
-                                          }
-                                        },
-                                        function($event) {
-                                          _vm.selectedItems()
-                                        }
-                                      ]
-                                    }
-                                  })
-                                ]),
-                                _vm._v(" "),
-                                _c("th", [_vm._v("ID")]),
-                                _vm._v(" "),
-                                _c("th", [_vm._v("Name")]),
-                                _vm._v(" "),
-                                _c("th", [_vm._v("Email")]),
-                                _vm._v(" "),
-                                _c("th", [_vm._v("Phone")]),
-                                _vm._v(" "),
-                                _c("th", { staticClass: "text-center" }, [
-                                  _vm._v("Logo")
-                                ]),
-                                _vm._v(" "),
-                                _c("th", { staticClass: "text-center" }, [
-                                  _vm._v("Status")
-                                ]),
-                                _vm._v(" "),
-                                _c("th", { staticClass: "text-center" }, [
-                                  _vm._v("Pictures")
-                                ]),
-                                _vm._v(" "),
-                                _c("th", { staticClass: "text-center" }, [
-                                  _vm._v("Services")
-                                ]),
-                                _vm._v(" "),
-                                _c("th", { staticClass: "text-center" }, [
-                                  _vm._v("Action")
-                                ])
-                              ]),
-                              _vm._v(" "),
-                              _vm._l(_vm.clients.data, function(client, index) {
-                                return _c("tr", { key: client.id }, [
-                                  _c("td", { staticClass: "text-center" }, [
-                                    _c("input", {
-                                      directives: [
-                                        {
-                                          name: "model",
-                                          rawName: "v-model",
-                                          value: _vm.selected,
-                                          expression: "selected"
-                                        }
-                                      ],
-                                      staticClass: "form-check-input",
-                                      attrs: { type: "checkbox" },
-                                      domProps: {
-                                        value: client.id,
-                                        checked: Array.isArray(_vm.selected)
-                                          ? _vm._i(_vm.selected, client.id) > -1
-                                          : _vm.selected
-                                      },
-                                      on: {
-                                        change: [
-                                          function($event) {
-                                            var $$a = _vm.selected,
-                                              $$el = $event.target,
-                                              $$c = $$el.checked ? true : false
-                                            if (Array.isArray($$a)) {
-                                              var $$v = client.id,
-                                                $$i = _vm._i($$a, $$v)
-                                              if ($$el.checked) {
-                                                $$i < 0 &&
-                                                  (_vm.selected = $$a.concat([
-                                                    $$v
-                                                  ]))
-                                              } else {
-                                                $$i > -1 &&
-                                                  (_vm.selected = $$a
-                                                    .slice(0, $$i)
-                                                    .concat($$a.slice($$i + 1)))
-                                              }
-                                            } else {
-                                              _vm.selected = $$c
-                                            }
-                                          },
-                                          function($event) {
-                                            _vm.updatecheckAll()
-                                          }
-                                        ]
-                                      }
-                                    })
-                                  ]),
-                                  _vm._v(" "),
-                                  _c("td", [_vm._v(_vm._s(client.id))]),
-                                  _vm._v(" "),
-                                  _c("td", [_vm._v(_vm._s(client.name))]),
-                                  _vm._v(" "),
-                                  _c("td", [_vm._v(_vm._s(client.email))]),
-                                  _vm._v(" "),
-                                  _c("td", [_vm._v(_vm._s(client.phone))]),
-                                  _vm._v(" "),
-                                  _c("td", { staticClass: "text-center" }, [
-                                    _c("img", {
-                                      staticClass: "imgPreview img-fluid",
-                                      attrs: {
-                                        alt: "Upload",
-                                        src: "/img/clients/" + client.logo
-                                      }
-                                    })
-                                  ]),
-                                  _vm._v(" "),
-                                  _c(
-                                    "td",
-                                    { staticClass: "small bold text-center" },
-                                    [
-                                      _c(
-                                        "b",
-                                        {
-                                          class:
-                                            client.status == "0"
-                                              ? "red"
-                                              : "green"
-                                        },
-                                        [
-                                          _vm._v(
-                                            "\n                    " +
-                                              _vm._s(
-                                                _vm.showStatus(client.status)
-                                              ) +
-                                              "\n                  "
-                                          )
-                                        ]
-                                      )
-                                    ]
-                                  ),
-                                  _vm._v(" "),
-                                  _c("td", { staticClass: "text-center" }, [
-                                    _c(
-                                      "button",
-                                      {
-                                        staticClass: "btn btn-sm btn-warning",
-                                        attrs: { type: "button" },
-                                        on: {
-                                          click: function($event) {
-                                            _vm.showPicturesModal(client)
-                                          }
-                                        }
-                                      },
-                                      [
-                                        _vm._v(
-                                          "\n                    Pictures\n                  "
-                                        )
-                                      ]
-                                    )
-                                  ]),
-                                  _vm._v(" "),
-                                  _c(
-                                    "td",
-                                    { staticClass: "text-center" },
-                                    [
-                                      _c(
-                                        "router-link",
-                                        {
-                                          staticClass: "btn btn-sm btn-warning",
-                                          attrs: {
-                                            to:
-                                              "/dashboard/service/" + client.id
-                                          }
-                                        },
-                                        [
-                                          _vm._v(
-                                            "\n                    Services\n                  "
-                                          )
-                                        ]
-                                      )
-                                    ],
-                                    1
-                                  ),
-                                  _vm._v(" "),
-                                  _c("td", { staticClass: "text-center" }, [
-                                    _c(
-                                      "button",
-                                      {
-                                        staticClass: "btn btn-sm btn-success",
-                                        attrs: { type: "button" },
-                                        on: {
-                                          click: function($event) {
-                                            _vm.showClientModal(client, index)
-                                          }
-                                        }
-                                      },
-                                      [_c("i", { staticClass: "fa fa-eye" })]
-                                    ),
-                                    _vm._v(" "),
-                                    _c(
-                                      "button",
-                                      {
-                                        staticClass: "btn btn-sm btn-primary",
-                                        attrs: { type: "button" },
-                                        on: {
-                                          click: function($event) {
-                                            _vm.openUpdateModal(client, index)
-                                          }
-                                        }
-                                      },
-                                      [_c("i", { staticClass: "fa fa-edit" })]
-                                    ),
-                                    _vm._v(" "),
-                                    _c(
-                                      "button",
-                                      {
-                                        staticClass: "btn btn-sm btn-danger",
-                                        attrs: { type: "button" },
-                                        on: {
-                                          click: function($event) {
-                                            _vm.deleteClient(client)
-                                          }
-                                        }
-                                      },
-                                      [_c("i", { staticClass: "fa fa-trash" })]
-                                    )
-                                  ])
-                                ])
-                              })
-                            ],
-                            2
-                          )
-                        ])
-                      ]
-                    )
-                  : _vm._e(),
-                _vm._v(" "),
-                _c("div", { staticClass: "card-footer" }, [
-                  _c("div", { staticClass: "row" }, [
-                    _c("div", { staticClass: "col-6 pl-0" }, [
-                      _c(
-                        "button",
-                        {
-                          staticClass: "btn btn-danger",
-                          attrs: { type: "button" },
-                          on: {
-                            click: function($event) {
-                              _vm.deleteSelected()
-                            }
-                          }
-                        },
-                        [
-                          _vm._v(
-                            "\n                    Delete Selected\n                  "
-                          )
-                        ]
-                      )
-                    ]),
-                    _vm._v(" "),
-                    _c(
-                      "div",
-                      { staticClass: "col-6" },
-                      [
-                        _c("pagination", {
-                          attrs: { data: _vm.clients },
-                          on: { "pagination-change-page": _vm.getResults }
-                        })
-                      ],
-                      1
-                    )
-                  ])
+                  ]),
+                  _vm._v(" "),
+                  _c(
+                    "div",
+                    { staticClass: "col-6" },
+                    [
+                      _c("pagination", {
+                        attrs: { data: _vm.clients },
+                        on: { "pagination-change-page": _vm.getResults }
+                      })
+                    ],
+                    1
+                  )
                 ])
               ])
-        ],
-        1
-      )
+            ])
+      ])
     ]),
     _vm._v(" "),
     _c(

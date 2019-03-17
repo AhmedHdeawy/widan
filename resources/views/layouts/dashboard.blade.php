@@ -56,9 +56,9 @@ scratch. This page gets rid of all links and provides the needed markup only.
           <img src="./img/users/1545674151.gif" class="img-circle elevation-2" alt="User Image">
         </div>
         <div class="info">
-          <a href="#" class="d-block">
-            {{ Auth::user()->username }}
-          </a>
+          <h5 class="d-block text-white">
+            {{ auth()->guard('admin')->user()->username }}
+          </h5>
         </div>
       </div>
 
@@ -134,7 +134,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
           </li>
 
           <li class="nav-item">
-            <a class="nav-link" href="{{ route('logout') }}"
+            <a class="nav-link" href="{{ route('admin-logout') }}"
                                        onclick="event.preventDefault();
                                                      document.getElementById('logout-form').submit();">
               <i class="nav-icon fa fa-power-off"></i>
@@ -143,7 +143,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
               </p>
             </a>
 
-            <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+            <form id="logout-form" action="{{ route('admin-logout') }}" method="POST" style="display: none;">
                 @csrf
             </form>
 
