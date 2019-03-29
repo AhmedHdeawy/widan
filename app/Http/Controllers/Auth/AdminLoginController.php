@@ -26,20 +26,11 @@ class AdminLoginController extends Controller
      *
      * @var string
      */
-    protected $redirectTo = '/home';
-
-    /**
-     * Create a new controller instance.
-     *
-     * @return void
-     */
-    public function __construct()
-    {
-        $this->middleware('guest')->except('logout');
-    }
+    protected $redirectTo = '/dashboard';
 
     public function showLoginForm()
     {
+      
       if (auth()->guard('admin')->check()) {
         return redirect()->route('dashboard');
       }

@@ -19,7 +19,7 @@ class UserController extends Controller
      */
     public function index()
     {
-        $users = User::with(['likes', 'dislikes', 'comments', 'clients'])
+        $users = User::with(['likes', 'dislikes', 'comments', 'clients', 'followers'])
                     ->latest()->paginate(10);
         return $users;
     }
@@ -59,12 +59,13 @@ class UserController extends Controller
         $request->merge([
           'avatar' => $avatarName,
           'location'  => 'location',
+          'username'  =>  mt_rand(1000000, mt_getrandmax())
         ]);
 
         // Create New User
         $user = User::create($request->all());
 
-        $user = User::with(['likes', 'dislikes', 'comments', 'clients'])->where('id', $user->id)->get();
+        $user = User::with(['likes', 'dislikes', 'comments', 'clients', 'followers'])->where('id', $user->id)->get();
 
         return response()->json($user);
     }
@@ -103,7 +104,7 @@ class UserController extends Controller
         $user = User::where('id', $request->id)->first();
         $user->update($request->all());
 
-        $user = User::with(['likes', 'dislikes', 'comments', 'clients'])->where('id', $user->id)->get();
+        $user = User::with(['likes', 'dislikes', 'comments', 'clients', 'followers'])->where('id', $user->id)->get();
 
         return response()->json($user);
     }

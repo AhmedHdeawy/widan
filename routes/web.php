@@ -9,21 +9,21 @@
 |
 | ADMIN		=>	auth()->guard('admin')->user()
 \
-\ CLIENT 	=>	auth()->guard('client')->user()
-|
 */
 
 Auth::routes();
 
 // Route::get('{path}', 'HomeController@index')->where('path', '([A-z\d-\/_.]+)?');
 
-Route::get('/', 'HomeController@index')->name('home');
+Route::get('/', 'HomeController@index');
+Route::get('/home', 'HomeController@home')->name('home');
 
 
 // Admin Login Routes
 Route::get('admin-login', ['as'=>'admin-login-form', 'uses'=>'Auth\AdminLoginController@showLoginForm']);
 Route::post('admin-login', ['as'=>'admin-login','uses'=>'Auth\AdminLoginController@login']);
 Route::post('admin-logout', ['as'=>'admin-logout','uses'=>'Auth\AdminLoginController@logout']);
+
 
 
 // Dashboard Routes
@@ -44,6 +44,7 @@ Route::group([ 'prefix'	=>	'dashboard', 'middleware'  =>  'admin' ], function(){
 	Route::group([ 'prefix'	=>	'clients' ], function(){
 
 		Route::get('/', 'Dashboard\ClientController@index');
+		Route::get('userclients', 'Dashboard\ClientController@userclients');
 		Route::get('findClient', 'Dashboard\ClientController@findClient');
 		Route::post('image', 'Dashboard\ClientController@image');
 		Route::post('savePictures', 'Dashboard\ClientController@savePictures');
@@ -53,6 +54,7 @@ Route::group([ 'prefix'	=>	'dashboard', 'middleware'  =>  'admin' ], function(){
     Route::delete('delete/{id}', 'Dashboard\ClientController@delete');
     Route::post('bulk', 'Dashboard\ClientController@bulk');
 		Route::get('categories', 'Dashboard\ClientController@categories');
+		Route::get('users', 'Dashboard\ClientController@users');
 
 	});
 

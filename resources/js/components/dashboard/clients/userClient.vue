@@ -78,7 +78,6 @@
                       <router-link :to="'/dashboard/service/'+client.id" class="btn btn-sm btn-primary">
                         Services
                       </router-link>
-
                     </td>
 
                     <td class="text-center">
@@ -145,25 +144,20 @@
                         {{ errorMessage }}
                       </p>
 
-                      <!-- User Field -->
-                      <div class="form-group">
-                        <label for="users">User</label>
-                        <v-select v-model="form.user_id"
-                          placeholder="Choose"
-                          label="name"
-                          :options="users">
-                        </v-select>
-
-                        <has-error :form="form" field="users"></has-error>
-                      </div>
-
-
                       <!-- Categories Field -->
                       <div class="form-group">
                         <label for="categories">Categories</label>
+                        <!-- <select name="categories" v-model="form.categories" id="categories" class="form-control"
+                        :class="{ 'is-invalid': form.errors.has('categories') }" multiple>
+                          <option v-for="(category, index) in categories" :key="category.id" :value="category.id">
+                            {{ category.name }}
+                          </option>
+                        </select> -->
+
                         <v-select v-model="form.categories"
                           placeholder="Choose"
                           label="name"
+                          @input="changeSelectedCategory"
                           multiple
                           :options="categories">
                         </v-select>
@@ -315,14 +309,8 @@
                             {{ client.name }}
                           </li>
                           <li class="list-group-item">
-                            <div class="row">
-                                <div class="col-2">
-                                  <strong class="w-25 d-inline-block">Description:</strong>
-                                </div>
-                                <div class="col-10">
-                                  {{ client.description }}
-                                </div>
-                            </div>
+                            <strong class="w-25 d-inline-block">Description:</strong>
+                            {{ client.description }}
                           </li>
                           <li class="list-group-item" v-if="client.user">
                             <strong class="w-25 d-inline-block">User:</strong>
@@ -454,20 +442,16 @@ export default {
           HereMap
         },
         created() {
-            Fire.$on('searching', () => {
-                this.spinner = true;
-                let query = this.$parent.$parent.search;
-                dashboardAPI.clients
-                  .find(query)
-                  .then( data => {
-                      this.spinner = false;
-                      this.clients = data
-                    });
-            });
+          if (isNaN(this.$route.params.id)) {
+            // Not a number, then push to 404 page
+            this.$router.push('/not-found');
+          } else {
+            // is Number then send a request to the server with this ID
+            this.userID = this.$route.params.id;
+            this.loadClients(this.$route.params.id);
+          }
 
-            this.loadClients();
-            this.loadCategroies();
-            this.loadUsers();
+          this.loadCategroies();
         },
 
         data() {
@@ -478,6 +462,7 @@ export default {
                 Modalspinner: false,
                 minuteStep: 5,
                 use12_hour: true,
+                userID: '',
                 clients: {},
                 client: {},
                 editClient: false,
@@ -489,7 +474,6 @@ export default {
                   pictures: {}
                 },
                 categories: [],
-                users: [],
                 form: new Form({
                     id: '',
                     name: '',
@@ -546,7 +530,6 @@ export default {
                 this.editClient = true;
 
                 this.form.fill(client);
-                this.form.user_id = client.user;
                 // Pass Client Index [ this.client ]
                 this.updateIndex = index;
 
@@ -582,7 +565,7 @@ export default {
                     });
             },
 
-            // Get Categories from API
+            // Fetch Data from API
             loadCategroies(){
               dashboardAPI.clients
                 .categories()
@@ -591,24 +574,19 @@ export default {
                   });
             },
 
-            // Get Users from API
-            loadUsers(){
-              dashboardAPI.clients
-                .users()
-                .then( data => {
-                    this.users = data
-                  });
-            },
-
 
             // Fetch Data from API
-            loadClients(){
+            loadClients(id){
               this.spinner = true;
               dashboardAPI.clients
-                .fetch(1)
+                .userClients(id, 1)
                 .then( data => {
                     this.clients = data
                     this.spinner = false
+                  })
+                  .catch( err => {
+                    console.log("Err");
+                      this.spinner = false
                   });
             },
 
@@ -617,6 +595,9 @@ export default {
                 this.Modalspinner = true
                 // Reset error Message
                 this.errorMessage = null;
+
+                this.form.user_id = this.userID;
+
                 // Submit the form via a POST request
                 this.form.post('dashboard/clients/create')
                     .then( res => {
@@ -812,6 +793,8 @@ export default {
 
             },
 
+            changeSelectedCategory(val) {
+            },
 
             // when user check all rows, then add all IDs to array
             selectedItems() {

@@ -28,6 +28,19 @@ class User extends Authenticatable
         'password', 'remember_token',
     ];
 
+    // Get Users that belongs to Client
+    public function clients()
+    {
+      return $this->hasMany('App\Client');
+    }
+
+    // Get Followers to this Cliant
+    public function followers()
+    {
+    	// return $this->belongsToMany('App\Follower', 'followers');
+      return $this->belongsToMany('App\Client', 'followers', 'user_id', 'client_id');
+    }
+
     // Get Likes that belongs to Client
     public function likes()
     {
@@ -46,10 +59,5 @@ class User extends Authenticatable
         return $this->hasMany('App\Comment');
     }
 
-    // Get Users that belongs to Client
-    public function clients()
-    {
-        return $this->belongsToMany('App\Client', 'client_users');
-    }
 
 }

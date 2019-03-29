@@ -54,13 +54,6 @@ return [
 
         ],
 
-        'client' => [
-
-            'driver' => 'session',
-
-            'provider' => 'clients',
-
-        ],
     ],
 
     /*
@@ -88,10 +81,6 @@ return [
         'admins' => [
             'driver' => 'eloquent',
             'model' => App\Admin::class,
-        ],
-        'clients' => [
-            'driver' => 'eloquent',
-            'model' => App\Client::class,
         ],
 
         // 'users' => [
@@ -125,12 +114,7 @@ return [
             'provider' => 'admins',
             'table' => 'password_resets',
             'expire' => 60,
-        ],
-        'clients' => [
-            'provider' => 'clients',
-            'table' => 'password_resets',
-            'expire' => 60,
-        ],
+        ]
     ],
 
 ];

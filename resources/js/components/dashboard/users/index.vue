@@ -28,6 +28,7 @@
                     <th>ID</th>
                     <th>Name</th>
                     <th>Email</th>
+                    <th class="text-center">Clients</th>
                     <th class="text-center">Avatar</th>
                     <th class="text-center">Status</th>
                     <th class="text-center">Action</th>
@@ -37,6 +38,11 @@
                     <td>{{ user.id }}</td>
                     <td>{{ user.name }}</td>
                     <td>{{ user.email }}</td>
+                    <td class="text-center">
+                        <router-link :to="'/dashboard/client/'+user.id" class="btn btn-sm btn-primary">
+                          Clients
+                        </router-link>
+                    </td>
                     <td class="text-center">
                       <img class="imgPreview img-fluid" alt="Upload" :src="'/img/users/'+user.avatar" />
                     </td>

@@ -7,6 +7,7 @@ use App\Http\Controllers\Controller;
 use Carbon\Carbon;
 use App\Client;
 use App\Category;
+use App\User;
 use App\Picture;
 use Image;
 
@@ -21,7 +22,20 @@ class ClientController extends Controller
      */
     public function index()
     {
-        $clients = Client::with(['services', 'likes', 'dislikes', 'pictures', 'users', 'categories'])
+        $clients = Client::with(['services', 'likes', 'dislikes', 'pictures', 'user', 'categories', 'followers'])
+                    ->latest()->paginate(10);
+        return $clients;
+    }
+
+
+    /**
+     * Show the application dashboard.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function userclients(Request $request)
+    {
+        $clients = Client::where('user_id', $request->id)->with(['services', 'likes', 'dislikes', 'pictures', 'user', 'categories', 'followers'])
                     ->latest()->paginate(10);
         return $clients;
     }
@@ -34,7 +48,7 @@ class ClientController extends Controller
     public function categories()
     {
         $categoriesArray = [];
-        $categories = category::all();
+        $categories = Category::all();
         foreach ($categories as $category) {
           $categoriesArray[] = [
             'id' =>  $category->id,
@@ -45,6 +59,27 @@ class ClientController extends Controller
 
         // return response()->json("ss", 404);
         return $categoriesArray;
+    }
+
+    /**
+     * Load Users
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function users()
+    {
+        $usersArray = [];
+        $users = User::all();
+        foreach ($users as $category) {
+          $usersArray[] = [
+            'id' =>  $category->id,
+            'name' =>  $category->name,
+          ];
+
+        }
+
+        // return response()->json("ss", 404);
+        return $usersArray;
     }
 
 
@@ -132,9 +167,18 @@ class ClientController extends Controller
     }
 
 
+    /**
+     * Craete Slug for each Client
+     * @param  Request $request [description]
+     * @return [type]           [description]
+     */
+     public function makeSlug()
+     {
+       return mt_rand(1000000, mt_getrandmax());
+     }
+
     public function create(Request $request)
     {
-
         // Validate CLient Data
         $this->validateClient($request);
 
@@ -151,6 +195,12 @@ class ClientController extends Controller
           $workingAll = "1";
         }
 
+        // Make a slug for this client if not provide
+        if (!$request->slug) {
+          $request->merge([
+            'slug'  =>  $this->makeSlug()
+          ]);
+        }
 
         //  Add modified requested to request array
         $request->merge([
@@ -158,7 +208,8 @@ class ClientController extends Controller
           'open_at' => $openAt,
           'close_at' => $closeAt,
           'location'  => 'location',
-          'working_all'  => $workingAll
+          'working_all'  => $workingAll,
+          'user_id' =>  $request->user_id['id']
         ]);
 
         // Create a new client
@@ -168,7 +219,7 @@ class ClientController extends Controller
         $clientCategories = $this->configureCategroiesForInsert($request->categories);
         $client->categories()->attach($clientCategories);
 
-        $client = Client::with(['likes', 'dislikes', 'comments', 'pictures', 'users', 'categories'])->where('id', $client->id)->get();
+        $client = Client::with(['services', 'likes', 'dislikes', 'pictures', 'user', 'categories', 'followers'])->where('id', $client->id)->get();
 
         return response()->json($client);
     }
@@ -211,9 +262,9 @@ class ClientController extends Controller
           'open_at' => $openAt,
           'close_at' => $closeAt,
           'location'  => 'location',
-          'working_all'  => $workingAll
+          'working_all'  => $workingAll,
+          'user_id' =>  $request->user_id['id']
         ]);
-
 
         // check if User has been change The Password
         if($request->password && !empty($request->password)) {
@@ -230,7 +281,7 @@ class ClientController extends Controller
         $clientCategories = $this->configureCategroiesForInsert($request->categories);
         $client->categories()->sync($clientCategories);
 
-        $client = Client::with(['likes', 'dislikes', 'comments', 'pictures', 'users', 'categories'])->where('id', $client->id)->get();
+        $client = Client::with(['services', 'likes', 'dislikes', 'pictures', 'user', 'categories', 'followers'])->where('id', $client->id)->get();
 
         return response()->json($client);
     }
@@ -241,7 +292,15 @@ class ClientController extends Controller
     public function delete(Request $request, $id)
     {
       $client = Client::where('id', $id)->first();
+
+      // Get logo name
+      $imageName = $client->logo;
+
+      // Delete the client
       $client->delete();
+
+      // delete client image
+      unlink(public_path('img/clients/').$imageName);
 
       return response()->json($id);
     }
@@ -256,31 +315,25 @@ class ClientController extends Controller
 
       $rules = [
           'categories' => 'required',
-          'name' => 'required|min:2|unique:clients',
-          'email' => 'required|email|unique:clients',
-          'password' => 'required|string',
+          'name' => 'required|min:2',
+          'slug'  =>  'unique:clients',
           'description' => 'required|min:20|string',
           'address' => 'required|min:5|string',
-          'phone' => 'required|min:3|string|unique:clients',
+          'phone' => 'required|min:3|string',
           'logo' => 'required|min:10|string',
-          // 'location' => 'required|min:10|string',
           'location' => 'min:10|string',
           'open_at' => 'required',
           'close_at' => 'required',
           'status' => 'required',
+          'user_id' => 'required',
           // 'pictures' => 'required|array',
       ];
 
       // in case Update client
       if ($type != null) {
-        $rules['name'] = 'required|min:2|unique:clients,name,'.$request->id;
-        $rules['password'] = 'string|min:2';
-        $rules['email'] = 'required|min:2|unique:clients,email,'.$request->id;
-        $rules['phone'] = 'required|min:2|unique:clients,phone,'.$request->id;
-        $rules['pictures'] = 'array';
+        $rules['slug'] = 'required|min:2|unique:clients,slug,'.$request->id;
         $rules['open_at'] = '';
         $rules['close_at'] = '';
-
       }
 
       // Run Validate

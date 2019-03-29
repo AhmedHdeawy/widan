@@ -53,8 +53,16 @@ export default {
             .get(`${dashboardURL}/clients?page=${page}`)
             .then(res =>  res.data),
 
+        userClients: (id, page) => axios
+            .get(`${dashboardURL}/clients/userclients?id=${id}&page=${page}`)
+            .then(res =>  res.data),
+
         categories: () => axios
             .get(`${dashboardURL}/clients/categories`)
+            .then(res =>  res.data),
+
+        users: () => axios
+            .get(`${dashboardURL}/clients/users`)
             .then(res =>  res.data),
 
         find: (query) => axios

@@ -19,7 +19,7 @@ class Client extends Authenticatable
      * @var array
      */
     protected $fillable = [
-        'name', 'email', 'password', 'description', 'address', 'phone', 'logo', 'location', 'open_at', 'close_at', 'working_all', 'status'
+        'name', 'slug', 'email', 'password', 'description', 'address', 'phone', 'logo', 'location', 'open_at', 'close_at', 'working_all', 'status', 'user_id'
     ];
 
     /**
@@ -43,11 +43,24 @@ class Client extends Authenticatable
         $this->attributes['password'] = Hash::make($value);
     }
 
+    // Get User that has this Client
+    public function user()
+    {
+      return $this->belongsTo('App\User');
+    }
+
+    // Get Followers to this Cliant
+    public function followers()
+    {
+    	return $this->belongsToMany('App\User', 'followers', 'client_id', 'user_id');
+    }
+
     // Get Services that belongs to Client
     public function services()
     {
     	return $this->hasMany('App\Service');
     }
+
 
     // Get Likes that belongs to Client
     public function likes()
@@ -71,12 +84,6 @@ class Client extends Authenticatable
     public function pictures()
     {
     	return $this->hasMany('App\Picture');
-    }
-
-    // Get Users that belongs to Client
-    public function users()
-    {
-    	return $this->belongsToMany('App\User', 'client_users');
     }
 
     // Get Categories that has Cliant
