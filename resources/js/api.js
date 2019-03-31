@@ -3,8 +3,8 @@ import axios from 'axios';
 
 let token = '';
 
-// const dashboardURL = "http://127.0.0.1:8000/dashboard"
-const dashboardURL = "http://rocky-stream-90247.herokuapp.com/dashboard"
+const dashboardURL = "http://127.0.0.1:8000/dashboard"
+// const dashboardURL = "http://offside.ml/taqiim/dashboard"
 
 export default {
     // General
