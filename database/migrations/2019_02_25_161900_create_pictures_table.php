@@ -18,10 +18,12 @@ class CreatePicturesTable extends Migration
             $table->string('name')->unique();
             $table->integer('client_id')->nullable()->unsigned()->index();
             $table->integer('service_id')->nullable()->unsigned()->index();
+            $table->integer('branch_id')->nullable()->unsigned()->index();
             $table->timestamps();
 
             $table->foreign('client_id')->references('id')->on('clients') ->onDelete('cascade');
             $table->foreign('service_id')->references('id')->on('services') ->onDelete('cascade');
+            $table->foreign('branch_id')->references('id')->on('branches') ->onDelete('cascade');
 
         });
     }

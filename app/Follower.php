@@ -22,6 +22,7 @@ class Follower extends Model
 
    protected $fillable = [
      'client_id',
+     'branch_id',
      'user_id',
    ];
 

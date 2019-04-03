@@ -13,13 +13,17 @@ use Faker\Generator as Faker;
 |
 */
 
-$factory->define(App\User::class, function (Faker $faker) {
+$factory->define(App\Client::class, function (Faker $faker) {
     return [
-        'name' => $faker->name,
-        'username' => $faker->userName,
+        'name' => $faker->catchPhrase,
+        'slug' => $faker->company,
         'email' => $faker->unique()->safeEmail,
-        'email_verified_at' => now(),
-        'password' => '$2y$10$TKh8H1.PfQx37YgCzwiKb.KjNyWgaHb9cbcoQgdIVFlYg7B77UdFm', // secret
-        'remember_token' => str_random(10),
+        'description' => $faker->realText($maxNbChars = 200, $indexSize = 2),
+        'address' => $faker->address,
+        'phone' => $faker->phoneNumber,
+        'logo' => 'taqiim_1551538152IJZm3OyrmXsGTM1.png',
+        'location'  =>  'location',
+        'user_id' =>  $faker->numberBetween($min = 1, $max = 19),
+        'city_id' =>  1
     ];
 });

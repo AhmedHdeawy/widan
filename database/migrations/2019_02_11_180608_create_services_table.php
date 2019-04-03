@@ -24,8 +24,11 @@ class CreateServicesTable extends Migration
             $table->enum('status', [0, 1])->default(1)->comment('0 => Not Acive, 1 => Active');
             $table->timestamps();
 
-            $table->integer('client_id')->unsigned()->index();
+            $table->integer('client_id')->unsigned()->index()->nullable();
             $table->foreign('client_id')->references('id')->on('clients') ->onDelete('cascade');
+
+            $table->integer('branch_id')->unsigned()->index()->nullable();
+            $table->foreign('branch_id')->references('id')->on('branches') ->onDelete('cascade');
 
         });
     }

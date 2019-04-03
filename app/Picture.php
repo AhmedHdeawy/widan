@@ -12,7 +12,7 @@ class Picture extends Model
      * @var array
      */
     protected $fillable = [
-        'name', 'client_id', 'service_id'
+        'name', 'client_id', 'service_id', 'branch_id'
     ];
 
     // Get Client that has this Picture
@@ -25,6 +25,12 @@ class Picture extends Model
     public function service()
     {
     	return $this->belongsTo('App\Service');
+    }
+
+    // Get Branch that has this Picture
+    public function branch()
+    {
+    	return $this->belongsTo('App\Branch');
     }
 
 }

@@ -16,8 +16,11 @@ class CreateFollowersTable extends Migration
         Schema::create('followers', function (Blueprint $table) {
             $table->increments('id');
 
-            $table->integer('client_id')->unsigned()->index();
+            $table->integer('client_id')->unsigned()->index()->nullable();
             $table->foreign('client_id')->references('id')->on('clients') ->onDelete('cascade');
+
+            $table->integer('branch_id')->unsigned()->index()->nullable();
+            $table->foreign('branch_id')->references('id')->on('branches') ->onDelete('cascade');
 
             $table->integer('user_id')->unsigned()->index();
             $table->foreign('user_id')->references('id')->on('users') ->onDelete('cascade');

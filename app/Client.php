@@ -19,7 +19,7 @@ class Client extends Authenticatable
      * @var array
      */
     protected $fillable = [
-        'name', 'slug', 'email', 'password', 'description', 'address', 'phone', 'logo', 'location', 'open_at', 'close_at', 'working_all', 'status', 'user_id'
+        'name', 'slug', 'email', 'description', 'address', 'phone', 'logo', 'location', 'status', 'user_id', 'city_id'
     ];
 
     /**
@@ -43,10 +43,22 @@ class Client extends Authenticatable
         $this->attributes['password'] = Hash::make($value);
     }
 
+    // Get review  that belongs to Client
+    public function reviews()
+    {
+    	return $this->hasMany('App\Review');
+    }
+
     // Get User that has this Client
     public function user()
     {
       return $this->belongsTo('App\User');
+    }
+
+    // Get City that has this Client
+    public function city()
+    {
+      return $this->belongsTo('App\City');
     }
 
     // Get Followers to this Cliant
@@ -61,23 +73,10 @@ class Client extends Authenticatable
     	return $this->hasMany('App\Service');
     }
 
-
-    // Get Likes that belongs to Client
-    public function likes()
+    // Get Branches that belongs to Client
+    public function branches()
     {
-    	return $this->hasMany('App\Like');
-    }
-
-    // Get DisLikes that belongs to Client
-    public function dislikes()
-    {
-    	return $this->hasMany('App\Dislike');
-    }
-
-    // Get Comments that belongs to Client
-    public function comments()
-    {
-    	return $this->hasMany('App\Comment');
+    	return $this->hasMany('App\Branch');
     }
 
     // Get Comments that belongs to Client
@@ -91,5 +90,17 @@ class Client extends Authenticatable
     {
     	return $this->belongsToMany('App\Category', 'client_categories');
     }
+
+    // // Get Likes that belongs to Client
+    // public function likes()
+    // {
+    // 	return $this->hasMany('App\Like');
+    // }
+    //
+    // // Get DisLikes that belongs to Client
+    // public function dislikes()
+    // {
+    // 	return $this->hasMany('App\Dislike');
+    // }
 
 }

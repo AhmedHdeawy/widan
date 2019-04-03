@@ -12,7 +12,7 @@ class Service extends Model
      * @var array
      */
     protected $fillable = [
-        'name', 'description', 'details', 'price', 'currency', 'status', 'client_id'
+        'name', 'description', 'details', 'price', 'currency', 'status', 'client_id', 'branch_id'
     ];
 
 
@@ -22,21 +22,37 @@ class Service extends Model
     	return $this->belongsTo('App\Client');
     }
 
-    // Get Likes that belongs to Service
-    public function likes()
+    // Get Branches that belongs to Service
+    public function branch()
     {
-    	return $this->hasMany('App\Like');
+    	return $this->belongsTo('App\Branch');
     }
 
-    // Get DisLikes that belongs to Service
-    public function dislikes()
+    // Get review  that belongs to Client
+    public function reviews()
     {
-    	return $this->hasMany('App\Dislike');
+    	return $this->hasMany('App\Review');
     }
 
     // Get Comments that belongs to Service
     public function pictures()
     {
-    	return $this->hasMany('App\Picture');
+      return $this->hasMany('App\Picture');
     }
+
+
+    //
+    // // Get Likes that belongs to Service
+    // public function likes()
+    // {
+    // 	return $this->hasMany('App\Like');
+    // }
+    //
+    // // Get DisLikes that belongs to Service
+    // public function dislikes()
+    // {
+    // 	return $this->hasMany('App\Dislike');
+    // }
+
+
 }

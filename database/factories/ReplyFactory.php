@@ -13,13 +13,10 @@ use Faker\Generator as Faker;
 |
 */
 
-$factory->define(App\User::class, function (Faker $faker) {
+$factory->define(App\Reply::class, function (Faker $faker) {
     return [
-        'name' => $faker->name,
-        'username' => $faker->userName,
-        'email' => $faker->unique()->safeEmail,
-        'email_verified_at' => now(),
-        'password' => '$2y$10$TKh8H1.PfQx37YgCzwiKb.KjNyWgaHb9cbcoQgdIVFlYg7B77UdFm', // secret
-        'remember_token' => str_random(10),
+        'text' => $faker->realText($maxNbChars = 30, $indexSize = 3),
+        'user_id' =>  $faker->numberBetween($min = 1, $max = 19),
+        'review_id' =>  $faker->numberBetween($min = 1, $max = 5),
     ];
 });
