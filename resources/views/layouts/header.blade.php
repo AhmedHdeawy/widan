@@ -92,13 +92,13 @@
 
             <div class="header-body-top">
 
-                <form class="d-flex flex-wrap">
+                <form class="d-flex flex-wrap" method="get" action="{{ route('search') }}">
 
                     <div class="form-content d-flex flex-wrap justify-content-around">
         
-                        <input type="text" placeholder="اكتب اسم المدينة......." />
+                        <input type="text" name="city" placeholder="اكتب اسم المدينة......." />
 
-                        <input list="sections" placeholder="جميع الاقسام.....">
+                        <input list="sections" name="categories" placeholder="جميع الاقسام.....">
 
                         <datalist id="sections">
 
@@ -110,9 +110,9 @@
 
                         </datalist>
 
-                        <input type="text" placeholder="كلمة البحث....." />
+                        <input type="text" name="text" placeholder="كلمة البحث....." />
 
-                        <button type="button">
+                        <button type="submit">
 
                             ابحث
                             <i class="fas fa-search"></i>

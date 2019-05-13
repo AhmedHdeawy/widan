@@ -27,5 +27,21 @@ class HomeController extends Controller
 
 
 
+    /**
+     * Show the application home.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function search(Request $request)
+    {
+        // dd($request->all());
+        $categories = Category::where('status', '1')
+                            ->where('name', 'LIKE', '%'.$request->text.'%')->paginate(20);
+        dd($categories);
+        return view('front.categories', compact('categories'));
+    }
+
+
+
 
 }

@@ -28,6 +28,9 @@ Route::group([ 'prefix' =>	'/' ], function(){
 
 	Route::get('/', 'HomeController@index');
 
+
+	Route::get('/search', 'HomeController@search')->name('search');
+
 	/**
 	 * Categories Routes
 	 */
