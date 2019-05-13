@@ -16,16 +16,16 @@ class Service extends Model
     ];
 
 
-    // Get Clients that belongs to Service
+    // Get Clients that has the Service
     public function client()
     {
     	return $this->belongsTo('App\Client');
     }
 
-    // Get Branches that belongs to Service
+    // Get Branch that has the Service
     public function branch()
     {
-    	return $this->belongsTo('App\Branch');
+        return $this->belongsTo('App\Branch');
     }
 
     // Get review  that belongs to Client

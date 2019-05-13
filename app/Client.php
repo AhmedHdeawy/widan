@@ -7,6 +7,7 @@ use Illuminate\Support\Facades\Hash;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Foundation\Auth\User as Authenticatable;
+use Image;
 
 class Client extends Authenticatable
 {
@@ -43,6 +44,28 @@ class Client extends Authenticatable
         $this->attributes['password'] = Hash::make($value);
     }
 
+    /**
+     * Set Category logo
+     *  @param string $file
+     */
+    public function setLogoAttribute($file)
+    {
+        
+        if (is_string($file)) {
+          $this->attributes['logo'] = $file;
+
+        } else {
+
+          $name =  $file->getClientOriginalName();
+          $name = time() . '_' . $name;
+
+          Image::make($file)->save('img/clients/'. $name);
+
+          $this->attributes['logo'] = $name;
+        }
+
+    }
+
     // Get review  that belongs to Client
     public function reviews()
     {
@@ -55,17 +78,6 @@ class Client extends Authenticatable
       return $this->belongsTo('App\User');
     }
 
-    // Get City that has this Client
-    public function city()
-    {
-      return $this->belongsTo('App\City');
-    }
-
-    // Get Followers to this Cliant
-    public function followers()
-    {
-    	return $this->belongsToMany('App\User', 'followers', 'client_id', 'user_id');
-    }
 
     // Get Services that belongs to Client
     public function services()
@@ -79,6 +91,12 @@ class Client extends Authenticatable
     	return $this->hasMany('App\Branch');
     }
 
+    // Get City that has this Client
+    public function city()
+    {
+      return $this->belongsTo('App\City');
+    }
+
     // Get Comments that belongs to Client
     public function pictures()
     {
@@ -89,6 +107,12 @@ class Client extends Authenticatable
     public function categories()
     {
     	return $this->belongsToMany('App\Category', 'client_categories');
+    }
+
+    // Get Followers to this Cliant
+    public function followers()
+    {
+      return $this->belongsToMany('App\User', 'followers', 'client_id', 'user_id');
     }
 
     // // Get Likes that belongs to Client

@@ -21,6 +21,8 @@ class CreateServicesTable extends Migration
             $table->text('details');
             $table->decimal('price', 10, 3)->default(1);
             $table->string('currency')->default('egp');
+            $table->text('logo');
+            $table->decimal('rate', 2, 1);
             $table->enum('status', [0, 1])->default(1)->comment('0 => Not Acive, 1 => Active');
             $table->timestamps();
 

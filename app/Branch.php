@@ -21,6 +21,12 @@ class Branch extends Model
   {
     return $this->belongsTo('App\Client');
   }
+  
+  // Get Services that belongs to Client
+  public function services()
+  {
+    return $this->hasMany('App\Service');
+  }
 
   // Get review  that belongs to Branch
   public function reviews()
@@ -40,9 +46,10 @@ class Branch extends Model
     return $this->belongsToMany('App\User', 'followers', 'branch_id', 'user_id');
   }
 
-  // Get Services that belongs to Client
-  public function services()
+  // Get Comments that belongs to Client
+  public function pictures()
   {
-    return $this->hasMany('App\Service');
+    return $this->hasMany('App\Picture');
   }
+
 }

@@ -59,7 +59,7 @@ Vue.component('moon-loader', MoonLoader);
 
 // Configure Vue Router
 const router = new VueRouter({
-    mode: 'hash',
+    mode: 'history',
     routes,
   	saveScrollPosition: true,
   	history:true,

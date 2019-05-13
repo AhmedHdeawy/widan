@@ -1,73 +1,87 @@
 @extends('layouts.app')
 
+@section('navbar')
+
+    @include('layouts.navbar-main')
+
+@endsection
+
+
 @section('content')
-<div class="container">
-    <div class="row justify-content-center">
-        <div class="col-md-8">
-            <div class="card">
-                <div class="card-header">{{ __('Login') }}</div>
 
-                <div class="card-body">
-                    <form method="POST" action="{{ route('login') }}">
-                        @csrf
 
-                        <div class="form-group row">
-                            <label for="email" class="col-md-4 col-form-label text-md-right">{{ __('E-Mail Address') }}</label>
+<!-- Start Section Sign In -->
 
-                            <div class="col-md-6">
-                                <input id="email" type="email" class="form-control{{ $errors->has('email') ? ' is-invalid' : '' }}" name="email" value="{{ old('email') }}" required autofocus>
+    <section class="sign-in">
 
-                                @if ($errors->has('email'))
-                                    <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $errors->first('email') }}</strong>
-                                    </span>
-                                @endif
-                            </div>
-                        </div>
+        <div class="container">
+            
+            <h3 class="font-weight-bold main-color my-5">تسجيل دخول</h3>
 
-                        <div class="form-group row">
-                            <label for="password" class="col-md-4 col-form-label text-md-right">{{ __('Password') }}</label>
 
-                            <div class="col-md-6">
-                                <input id="password" type="password" class="form-control{{ $errors->has('password') ? ' is-invalid' : '' }}" name="password" required>
+               {{--  <div class="communication">
 
-                                @if ($errors->has('password'))
-                                    <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $errors->first('password') }}</strong>
-                                    </span>
-                                @endif
-                            </div>
-                        </div>
+                    <button type="button"><a href="#"><i class="fab fa-google"></i>تسجيل الدخول بواسطة جوجل</a></button>
 
-                        <div class="form-group row">
-                            <div class="col-md-6 offset-md-4">
-                                <div class="form-check">
-                                    <input class="form-check-input" type="checkbox" name="remember" id="remember" {{ old('remember') ? 'checked' : '' }}>
+                    <button type="button"><a href="#"><i class="fab fa-facebook-f"></i>تسجيل الدخول بواسطة فيسبوك</a></button>
 
-                                    <label class="form-check-label" for="remember">
-                                        {{ __('Remember Me') }}
-                                    </label>
-                                </div>
-                            </div>
-                        </div>
+                </div> --}}
 
-                        <div class="form-group row mb-0">
-                            <div class="col-md-8 offset-md-4">
-                                <button type="submit" class="btn btn-primary">
-                                    {{ __('Login') }}
-                                </button>
+                <p>
+                    @if ($errors->has('email'))
+                        <strong class="text-danger">الايميل او كلمة المرور خطأ</strong>
+                    @endif
+                </p>
 
-                                @if (Route::has('password.request'))
-                                    <a class="btn btn-link" href="{{ route('password.request') }}">
-                                        {{ __('Forgot Your Password?') }}
-                                    </a>
-                                @endif
-                            </div>
-                        </div>
-                    </form>
+                <form class="form-insid" method="POST" action="{{ route('login') }}">
+                    @csrf
+    
+                    <div class="form-group px-4 mb-5">
+                        
+                        <input type="email" name="email" value="{{ old('email') }}" placeholder="البريد الالكتروني" class="form-control" required autofocus />
+                        
+                    </div>
+
+                    <div class="form-group px-4">
+                        
+                        <input type="password" placeholder="كلمة المرور" class="form-control{{ $errors->has('password') ? ' is-invalid' : '' }}" name="password" required />
+
+                        @if ($errors->has('password'))
+                            <span class="invalid-feedback" role="alert">
+                                <strong>{{ $errors->first('password') }}</strong>
+                            </span>
+                        @endif
+
+                    </div>
+
+                    <div class="form-group form-check text-right px-4">
+                        <input type="checkbox" name="remember" class="form-check-input" id="remember">
+                        <label class="form-check-label" for="remember">تذكرني</label>
+                    </div>
+
+
+                    <div class="content">
+
+                    </div>
+                    
+                    <button type="submit">تسجيل الدخول</button>
+
+                </form>
+
+                <div class="parg">
+
+                    <p>هل انت مستخدم جديد؟</p>
+
+                    <a href="{{ route('register') }}">انشاء حساب</a>
+
                 </div>
-            </div>
+                
+
         </div>
-    </div>
-</div>
+
+    </section>
+
+<!-- Start Section  Sign In -->
+
+
 @endsection

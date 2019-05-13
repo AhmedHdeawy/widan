@@ -23,6 +23,7 @@ class CreateBranchesTable extends Migration
             $table->string('phone');
             $table->text('logo');
             $table->string('location');
+            $table->decimal('rate', 2, 1);
             // 0 => Not Acive, 1 => Active, 2 => Stopped
             $table->enum('status', [0, 1, 2])->default(1)->comment('0 => Not Acive, 1 => Active, 2 => Stopped');
             $table->integer('client_id')->unsigned()->index();
