@@ -105,11 +105,6 @@ class UsersController extends Controller
     public function update(UserRequest $request, User $user)
     {
 
-        // // check if User has been change The Password
-        // if($request->password && !empty($request->password)) {
-        //     $request->merge(['password' => $request->password]);
-        // }
-
         $user->update($request->all());
 
         return redirect()->route('admin.users.index')->with('msg_success', __('lang.updatedSuccessfully'));

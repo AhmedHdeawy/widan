@@ -97,6 +97,14 @@
                                 <div class="text-center">
                                     <input type="submit" value="{{ __('lang.register') }}" class="btn btn-success btn-block rounded-0 py-2">
                                 </div>
+
+                                <div class="my-3">
+                                    <p class="m-0">
+                                        {{ __('lang.hasUser') }}
+                                        <a href="{{ route('login') }}" class="gr-color">{{ __('lang.login') }}</a>
+                                    </p>
+                                </div>
+
                             </div>
 
                         </div>

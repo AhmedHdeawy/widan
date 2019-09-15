@@ -12,14 +12,17 @@ return [
 	'en'                        => 'إنجليزى',
     'ar.inverse'                => 'ع',
     'en.inverse'                => 'EN',
+    'back'                      =>  'رجوع',
     'show'                      =>  'عرض',
     'more'                      =>  'المزيد',
     'create'                    =>  'اضافة',
     'save'                    =>  'حفظ',
+    'view'                      =>  'عرض',
     'edit'                    =>  'تعديل',
     'update'                    =>  'تحديث',
     'delete'                    =>  'حذف',
     'status'                    =>  'الحالة',
+    'done'                      =>  'تم',
     'active'                    =>  'نشط',
     'stopped'                    =>  'متوقف',
     'ar.active'                    =>  'نشط',
@@ -63,6 +66,13 @@ return [
     'loginHint'     =>  'من فضلك ادخل بياناتك',
     'registerTitle'    =>  'تسجيل عضوية جديدة',
     'registerHint'     =>  'من فضلك ادخل بياناتك كاملة وبشكل صحيح',
+    'bookingTitle'    =>  'احجز الان',
+    'bookingHint'     =>  'من فضلك ادخل بياناتك صحيحة لنتواصل معك بسهولة',
+    'day'       =>  'اليوم',
+    'time'       =>  'الوقت',
+    'notes'     =>  'ملاحظات',
+    'hasNoUser' =>  'ليس لديك حساب ؟',
+    'hasUser' =>  'هل انت عضو معنا ؟',
     
 
     'createdSuccessfully'   =>  'تمت الاضافة بنجاح',
@@ -82,7 +92,7 @@ return [
     /**
      * Front
      */
-    'booking'   =>  'الحجوزات',
+    'booking'   =>  'الحجز',
     'login'    =>  'دخول',
     'register'    =>  'تسجيل',
     'latestArticle' =>  'أحدث المقالات',
@@ -94,9 +104,33 @@ return [
 
 
     /**
+     * Bookings
+     */
+    'bookings'  =>  'الحجوزات',
+    'city'      =>  'المدينة',
+    'building'      =>  'المبني / الفيلا',
+    'unit'      =>  'الوحدة',
+    'street'      =>  'اسم الشارع',
+    'time_from'     =>  'وقت البداية',
+    'time_to'     =>  'وقت النهاية',
+    'personalDetails'   =>  'البيانات الشخصية',
+    'locationDetails'   =>  'بيانات المكان',
+    'bookingDetails'   =>  'بيانات الحجز',
+    'Fri'       =>  'الجمعة',
+    'Sat'       =>  'السبت',
+    'Sun'       =>  'الاحد',
+    'Mon'       =>  'الاثنين',
+    'Tue'       =>  'الثلاثاء',
+    'Wed'       =>  'الاربعاء',
+    'Thu'       =>  'الخميس',
+    'bookingDone'   =>  'لقت تم حجز طلبك وسيتم التواصل معك في اقرب وقت',
+    'selectService' =>  'اختر الخدمة',
+    
+    /**
      * Services
      */
     'services'  =>  'الخدمات',
+    'service'  =>  'الخدمة',
     'services_logo'    =>  'صورة الخدمة',
     'services_title'    =>  'عنوان الخدمة',
     'services_desc'    =>  'وصف الخدمة',

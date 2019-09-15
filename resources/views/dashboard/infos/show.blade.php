@@ -46,7 +46,7 @@
                 </a>
 
                 <a href="{{ route('admin.infos.index') }}" class="btn btn-secondary">
-                  Back
+                  {{ __('lang.back') }}
                 </a>
             </div>
         </div>

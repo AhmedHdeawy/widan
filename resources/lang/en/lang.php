@@ -12,14 +12,17 @@ return [
 	'en'                        => 'English',
     'ar.inverse'                => 'ع',
     'en.inverse'                => 'EN',
+    'back'                      =>  'Back',
     'show'                      =>  'Show',
     'more'                      =>  'More',
     'create'                    =>  'Create',
     'save'                    =>  'Save',
+    'view'                      =>  'View',
     'edit'                    =>  'Edit',
     'update'                    =>  'Update',
     'delete'                    =>  'Delete',
     'status'                    =>  'Status',
+    'done'                      =>  'Done',
     'active'                    =>  'Active',
     'stopped'                    =>  'Stopped',
     'en.active'                    =>  'Active',
@@ -63,6 +66,11 @@ return [
     'loginHint'     =>  'Please enter your details',
     'registerTitle'    =>  'Register a new membership',
     'registerHint'     =>  'Please enter your full details correctly',
+    'bookingTitle'    =>  'Order now',
+    'bookingHint'     =>  'Please enter your details correctly to contact you with ease',
+    'day'       =>  'Day',
+    'time'       =>  'Time',
+    'notes'     =>  'Notes',
 
 
     'createdSuccessfully'   =>  'Created Successfully',
@@ -95,9 +103,34 @@ return [
 
 
     /**
+     * Bookings
+     */
+    'bookings'  =>  'Booking',
+    'city'      =>  'City',
+    'building'      =>  'Building/Villa',
+    'unit'      =>  'Unit',
+    'street'      =>  'Street Name',
+    'time_from'     =>  'Start Time',
+    'time_to'     =>  'End Time',
+    'personalDetails'   =>  'Personal Details',
+    'locationDetails'   =>  'Location Details',
+    'bookingDetails'   =>  'Booking Details',
+    'Fri'       =>  'Friday',
+    'Sat'       =>  'Saturday',
+    'Sun'       =>  'Sunday',
+    'Mon'       =>  'Monday',
+    'Tue'       =>  'Tuesday',
+    'Wed'       =>  'Wednesday',
+    'Thu'       =>  'Thursday',
+    'bookingDone'   =>  'Your request has been booked and you will be contacted as soon as possible',
+    'selectService' =>  'Select Service',
+   
+
+    /**
      * Services
      */
     'services'  =>  'Services',
+    'service'  =>  'Service',
     'services_logo'    =>  'Service Logo',
     'services_title'    =>  'Service Title',
     'services_desc'    =>  'Service Description',

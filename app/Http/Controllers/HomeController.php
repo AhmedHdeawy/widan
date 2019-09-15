@@ -11,6 +11,7 @@ use App\Models\Blog;
 use App\Models\Info;
 use App\Models\Setting;
 use App\Models\ContactUs;
+use App\Models\Booking;
 
 class HomeController extends Controller
 {
@@ -98,7 +99,7 @@ class HomeController extends Controller
 
 
     /**
-     * Show the about page.
+     * Show the ContactUs page.
      *
      * @return \Illuminate\Contracts\Support\Renderable
      */
@@ -109,7 +110,7 @@ class HomeController extends Controller
 
 
     /**
-     * Show the ContactUs Page.
+     * Post the ContactUs Form.
      *
      * @return \Illuminate\Http\Response
      */
@@ -138,6 +139,128 @@ class HomeController extends Controller
             'email' => 'required|email|max:100',
             'phone' => 'required|max:100',
             'message' => 'required|string',
+        ])->validate();   
+    }
+
+
+    /**
+     * Show the ZBooking page.
+     *
+     * @return \Illuminate\Contracts\Support\Renderable
+     */
+    public function booking()
+    {
+
+        $services = Service::active()->get();
+
+        $days = $this->getBookingDays();
+
+        $times = $this->getBookingTime();
+
+        return view('front.booking', compact('days', 'times', 'services'));
+    }
+
+    /**
+     * Function to Get Available Booking Days
+     */
+    private function getBookingDays()
+    {
+        // Get Week Days
+        $datetime = new \DateTime();
+        // Exclude Today from Days
+        $datetime->add( date_interval_create_from_date_string('1 days') );
+        
+        $days = [];
+
+        for ($i=0; $i < 20; $i++) { 
+                
+            // Exclude Friday from each week
+            if ($datetime->format('N') == 5){
+                // add new day after Friday
+                $datetime->add( date_interval_create_from_date_string('1 days') );
+                continue;
+
+            } else {
+
+                // Create Option for Select Tag
+                $days[] = 
+                '<option value="'.$datetime->format('Y-m-d').'">' . __('lang.'.$datetime->format('D')) . ' - ' .$datetime->format('Y/m/d') . '</option>';
+
+                // Add New Day
+                $datetime->add( date_interval_create_from_date_string('1 days') );
+            }
+        }
+
+        return $days;
+    }
+
+    /**
+     * Function to Get Available Booking Time
+     */
+    private function getBookingTime()
+    {
+        // Get Week Days
+        $datetime = new \DateTime('08:00:00');
+        $time = [];
+
+        for ($i=0; $i <= 12; $i++) { 
+                
+            // Create Option for Select Tag
+                $time[] = 
+                '<option value="'.$datetime->format('H:i:s').'">' . $datetime->format('H A') . '</option>';
+
+                // Add Hour
+                $datetime->add( new \DateInterval('PT1H') );
+                // $datetime->add( new \DateInterval('PT30M') );
+        }
+
+        return $time;
+    }
+
+
+    /**
+     * Post the ContactUs Form.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function postBooking(Request $request)
+    {        
+        // Validate Form
+        $this->validateBooking($request);
+
+        $request->merge([
+            'user_id'   =>  auth()->user()->id
+        ]);
+
+        // Create New Row
+        Booking::create($request->all());
+
+        return redirect()->route('booking')->with('status', __('lang.bookingDone'));
+
+    }
+
+
+    /**
+     * Validate Form Request.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function validateBooking(Request $request)
+    {
+        
+        Validator::make($request->all(), [
+            'name' => 'required|string|max:100|min:2',
+            'email' => 'required|email|max:100|min:2',
+            'phone' => 'required|max:100|min:2',
+            'city' => 'required|max:100|min:2',
+            'building' => 'required|max:100|min:2',
+            'unit' => 'required|max:100|min:1',
+            'street' => 'required|max:100|min:2',
+            'day' => 'required|max:100|min:2',
+            'time_from' => 'required|max:100|min:2',
+            'time_to' => 'required|max:100|after:time_from',
+            'notes' => 'string|nullable',
+
         ])->validate();   
     }
 

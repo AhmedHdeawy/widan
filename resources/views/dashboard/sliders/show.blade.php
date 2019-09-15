@@ -63,7 +63,7 @@
                 </a>
 
                 <a href="{{ route('admin.sliders.index') }}" class="btn btn-secondary">
-                  Back
+                  {{ __('lang.back') }}
                 </a>
             </div>
         </div>

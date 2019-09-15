@@ -8,6 +8,12 @@
             </li>
 
             <li class="nav-item">
+                <a class="nav-link {{ $segment == 'bookings' ? 'active' : '' }}" href="{{ route('admin.bookings.index') }}">
+                    <i class="icon-basket-loaded"></i> {{ __('lang.bookings') }} 
+                </a>
+            </li>
+
+            <li class="nav-item">
                 <a class="nav-link {{ $segment == 'services' ? 'active' : '' }}" href="{{ route('admin.services.index') }}">
                     <i class="icon-layers"></i> {{ __('lang.services') }} 
                 </a>

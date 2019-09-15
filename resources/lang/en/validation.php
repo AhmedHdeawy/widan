@@ -179,6 +179,12 @@ return [
         'message'               =>  'Message',
         'status'                =>  'Status',
         'avatar'                =>  'Avatar',
+        'building'              =>  'Building/Villa',
+        'unit'                  =>  'Unit',
+        'street'                =>  'Street',
+        'notes'                 =>  'Notes',
+        'time_from'             =>  'Start Time',
+        'time_to'             =>  'End Time',
 
         // Countries Validation
         'countries_name'  =>  'Countries Name',

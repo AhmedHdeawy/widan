@@ -33,7 +33,7 @@
 		      </li>
 
 		      <li class="nav-item">
-		        <a class="nav-link mx-2 fb-500" href="#">{{ __('lang.booking') }}</a>
+		        <a class="nav-link mx-2 fb-500" href="{{ route('booking') }}">{{ __('lang.bookings') }}</a>
 		      </li>
 
 		    </ul>
@@ -43,7 +43,7 @@
 
 				@if(auth()->check())
 				      <li class="nav-item">
-				        <a class="nav-link fb-500" href="#">
+				        <a class="nav-link fb-500" href="/">
 				        	<img src="{{ auth()->user()->avatar ? asset('uploads/users/' . auth()->user()->avatar) : asset('front/images/man.png')  }}" class="img-fluid navbar-profile mx-1">
 				        	{{ auth()->user()->name }}
 				        </a>

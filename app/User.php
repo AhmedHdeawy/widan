@@ -68,4 +68,13 @@ class User extends Authenticatable
     	}
     }
 
+
+    /**
+     * bookings that belongs To this User
+     */
+    public function bookings()
+    {
+        return $this->hasMany('App\Models\Booking', 'user_id', 'id');
+    }
+
 }

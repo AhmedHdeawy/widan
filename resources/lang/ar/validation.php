@@ -172,6 +172,12 @@ return [
         'message'               =>  'الرسالة',
         'status'                =>  'الحالة',
         'avatar'                =>  'الصورة الشخصية',
+        'building'              =>  'المبنى او الفيلا',
+        'unit'                  =>  'الوحدة',
+        'street'                =>  'اسم الشارع',
+        'notes'                 =>  'ملاحظات',
+        'time_from'             =>  'وقت البداية',
+        'time_to'             =>  'وقت النهاية',
 
         // Countries Validation
         'countries_name'  =>  'اسم الدولة',

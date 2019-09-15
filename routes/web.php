@@ -23,10 +23,6 @@ Route::group([ 'prefix' =>	'/' ], function(){
     // About
     Route::get('about', 'HomeController@about')->name('about');
 
-    // Contact Us
-    Route::get('contact-us', 'HomeController@contactus')->name('contactus');
-    Route::post('contact-us', 'HomeController@postContactUs')->name('contactusForm');
-
     // Services
     Route::get('services', 'HomeController@services')->name('services');
     Route::get('services/{title}', 'HomeController@service')->name('service');
@@ -34,6 +30,16 @@ Route::group([ 'prefix' =>	'/' ], function(){
     // Blogs
     Route::get('blogs', 'HomeController@blogs')->name('blogs');
     Route::get('blogs/{title}', 'HomeController@blog')->name('blog');
+
+    // Contact Us
+    Route::get('contact-us', 'HomeController@contactus')->name('contactus');
+    Route::post('contact-us', 'HomeController@postContactUs')->name('postContactUs');
+
+    Route::group([ 'middleware' =>  'auth' ], function(){
+        // Boking
+        Route::get('booking', 'HomeController@booking')->name('booking');
+        Route::post('booking', 'HomeController@postBooking')->name('postBooking');
+    });
 
 });
 
@@ -53,10 +59,11 @@ Route::prefix('admin')
 		// Dashboard Routes
 		Route::get('/', 'Dashboard\DashboardController@index')->name('dashboard.index');
 
-		// Admin Logout Route
-    	Route::post('logout', 'Auth\AdminLoginController@logout')->name('logout');
-
-    	// Services Routes
+        // Bookings Routes
+        Route::resource('bookings', 'Dashboard\BookingsController')->except('create', 'store', 'edit', 'update', 'delete');
+        Route::get('bookings/doneBooking/{booking}', 'Dashboard\BookingsController@doneBooking')->name('bookings.doneBooking');
+    	
+        // Services Routes
     	Route::resource('services', 'Dashboard\ServicesController');
 
         // Blogs Routes
@@ -79,6 +86,10 @@ Route::prefix('admin')
 
         // Admins Routes
         Route::resource('admins', 'Dashboard\AdminsController');
+
+
+        // Admin Logout Route
+        Route::post('logout', 'Auth\AdminLoginController@logout')->name('logout');
 		
 
 	});

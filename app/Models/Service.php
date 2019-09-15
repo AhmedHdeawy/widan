@@ -46,6 +46,14 @@ class Service extends Model implements TranslatableContract
     }
 
 
+    /**
+     * bookings that belongs To this Service
+     */
+    public function bookings()
+    {
+        return $this->hasMany('App\Models\Booking', 'service_id', 'id');
+    }
+
 
     /**
      * Scope a query to fetch Active data only.

@@ -56,7 +56,7 @@
 
 
             <!--Form with header-->
-            <form action="{{ route('contactusForm') }}" method="post">
+            <form action="{{ route('postContactUs') }}" method="post">
 
 				@csrf
 
