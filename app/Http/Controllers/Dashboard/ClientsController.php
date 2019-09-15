@@ -5,10 +5,8 @@ namespace App\Http\Controllers\Dashboard;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\ClientRequest;
-use App\Client;
-use App\Service;
-use App\User;
-use App\City;
+
+use App\Models\Client;
 
 
 class ClientsController extends Controller
@@ -70,13 +68,6 @@ class ClientsController extends Controller
      */
     public function store(ClientRequest $request)
     {
-
-        // Make a slug for this client if not provide
-        if (!$request->slug) {
-          $request->merge([
-            'slug'  =>  $this->makeSlug()
-          ]);
-        }
 
         $client = Client::create($request->all());
 
@@ -171,17 +162,6 @@ class ClientsController extends Controller
 
         return view('dashboard.services.show', compact('service'));
     }
-
-
-    /**
-     * Craete Slug for each Client
-     * @param  Request $request [description]
-     * @return [type]           [description]
-     */
-     public function makeSlug()
-     {
-       return mt_rand(1000000, mt_getrandmax());
-     }
 
 
 }

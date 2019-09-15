@@ -65109,7 +65109,7 @@ webpackContext.id = 172;
 var token = '';
 
 var dashboardURL = "http://127.0.0.1:8000/dashboard";
-// const dashboardURL = "http://offside.ml/taqiim/dashboard"
+// const dashboardURL = "http://offside.ml/widan/dashboard"
 
 /* harmony default export */ __webpack_exports__["a"] = ({
     // General

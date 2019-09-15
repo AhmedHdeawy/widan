@@ -5,12 +5,9 @@ namespace App\Http\Controllers\Dashboard;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\ServiceRequest;
-use Carbon\Carbon;
-use App\Service;
-use App\Client;
-use App\Branch;
-use App\Picture;
-use Image;
+
+use App\Models\Service;
+
 
 class ServicesController extends Controller
 {
@@ -21,31 +18,50 @@ class ServicesController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index(Request $request, Client $client)
+    public function index(Request $request)
     {
+    
+      $request->flash();
 
-        $name = $request->name;
-        $status = $request->status;
+      $inputsArray = [    
+        'service_translations.services_title'   => [ 'like', request('title') ],
+        'services.services_status'              => [ '=', request('status') ]
+      ];
 
-        $request->flash();
-        $clients = null;
+      $query = Service::join('service_translations', 'services.id', 'service_translations.service_id')
+                        ->groupBy('services.id');
+      
+      $searchQuery = $this->handleSearch($query, $inputsArray);
 
-        if ($name || $status) {  
-          
-          $services = Service::where('client_id', $client->id)
-                            ->where('name', 'LIKE', "%{$name}%")
-                            ->orWhere('status', $status)
-                            ->with(['client', 'pictures'])
-                            ->latest()->paginate(10);
+      $services = $searchQuery->paginate(env('perPage'));
 
-        } else {
-
-        $services = Service::where('client_id', $client->id)->with(['client', 'pictures'])
-                    ->latest()->paginate(10);
-        }
+      return view('dashboard.services.index', compact('services'));
+    }
 
 
-        return view('dashboard.services.index', compact('services', 'client'));
+    /**
+     * Goto the form for creating a new service.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function create()
+    {
+      return view('dashboard.services.create');
+    }
+
+
+    /**
+     * Store a newly created service.
+     *
+     * @param  \App\Modules\Admin\Http\Requests\ServiceRequest  $request
+     * @return \Illuminate\Http\Response
+     */
+    public function store(ServiceRequest $request)
+    {
+       // dd($request->all());
+        $service = Service::create($request->all());
+
+        return redirect()->route('admin.services.index')->with('msg_success', __('lang.createdSuccessfully'));
     }
 
 
@@ -55,41 +71,12 @@ class ServicesController extends Controller
      * @param  \App\Models\Service  $service
      * @return \Illuminate\Http\Response
      */
-    public function show(Service $service)
+    public function show(Request $request, Service $service)
     {
-
-        $service = Service::where('id', $service->id)
-                    ->with(['client', 'pictures'])->first();
-
-        return view('dashboard.services.show', compact('service'));
+        $showLang = $request->showLang;
+        return view('dashboard.services.show', compact('service', 'showLang'));
     }
 
-
-
-    public function create(Client $client)
-    {
-      $branches = Branch::where('client_id', $client->id)->get();
-      return view('dashboard.services.create', compact('branches', 'client'));
-    }
-
-
-    /**
-     * Store a newly created client.
-     *
-     * @param  \App\Modules\Admin\Http\Requests\ClientRequest  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(ServiceRequest $request, Client $client)
-    { 
-        dd($request->all());
-        $request->merge([
-            'client_id' =>  $client->id
-        ]);
-
-        Service::create($request->all());
-
-        return redirect()->route('dashboard.services', $client->id)->with('msg_success', 'Service Added Successfully');
-    }
 
     /**
      * Show the form for editing the specified resource.
@@ -99,41 +86,40 @@ class ServicesController extends Controller
      */
     public function edit(Service $service)
     {
-      $branches = Branch::where('client_id', $service->client->id)->get();
-      
-      return view('dashboard.services.edit', compact('service', 'branches'));
+      return view('dashboard.services.edit', compact('service'));
     }
 
     
     /**
      * Update the specified resource in storage.
      *
-     * @param  \App\Modules\Admin\Http\Requests\ClientRequest  $request
+     * @param  \App\Modules\Admin\Http\Requests\ServiceRequest  $request
      * @param  \App\Models\Service  $service
      * @return \Illuminate\Http\Response
      */
-    public function update(ServiceRequest $request)
+    public function update(ServiceRequest $request, Service $service)
     {
-        // dd($request->all());
-        $service = Service::where('id', $request->id)->first();
-
         $service->update($request->all());
 
-        return redirect()->route('dashboard.services', $service->client->id)->with('msg_success', 'Service Updated Successfully');
+        return redirect()->route('admin.services.index')->with('msg_success', __('lang.updatedSuccessfully'));
     }
 
     /**
      * Delete the service
      */
-    public function destroy(Request $request, $id)
+    public function destroy(Service $service)
     {
+        // Get Image name
+        $logo = $service->services_logo;
+        
+        // Delete Record
+        $service->delete();
 
-      $service = Service::where('id', $id)->first();
-      $clientID = $service->client->id;
+        // Delete Image
+        $this->deleteFile('services/', $logo);
 
-      $service->delete();
 
-      return redirect()->route('dashboard.services', $clientID)->with('msg_success', 'Service Deleted Successfully');
+      return back()->with('msg_success', __('lang.deletedSuccessfully'));
     }
 
 }

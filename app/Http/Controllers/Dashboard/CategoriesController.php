@@ -5,7 +5,8 @@ namespace App\Http\Controllers\Dashboard;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\CategoryRequest;
-use App\Category;
+
+use App\Models\Category;
 
 
 class CategoriesController extends Controller
@@ -19,20 +20,28 @@ class CategoriesController extends Controller
      */
     public function index(Request $request)
     {
-        // dd($request->all());
 
       $name = $request->name;
       $status = $request->status;
 
       $request->flash();
 
-      $categories = null;
-      if ($request->name || $request->status) {  
-        $categories = Category::where('name', 'LIKE', "%{$name}%")->where('status', $status)->with('clients')->latest()->paginate(10);
+      // Fetch All Categories
+      $categories = Category::latest();
+
+      // Filter Categories by Search
+      if (isset($name)) {  
+        $categories = $categories->where('categories_name', 'LIKE', "%{$name}%");
+      
+      } elseif ( isset($status)) {
+        
+        $categories = $categories->where('categories_status', $status);
+
       } else {
-        $categories = Category::with('clients')->latest()->paginate(15);
+        $categories = $categories->with('clients');
       }
 
+        $categories = $categories->paginate(15);        
 
       return view('dashboard.categories.index', compact('categories'));
     }
@@ -58,12 +67,14 @@ class CategoriesController extends Controller
     public function store(CategoryRequest $request)
     {
         $request->merge([
-            'slug'  =>  $this->makeSlug($request->name)
+            // 'categories_slug'   =>  $this->makeSlug($request->categories_name)
+            'categories_slug'   =>  str_slug($request->categories_name)
         ]);
+        
 
         $category = Category::create($request->all());
 
-        return redirect()->route('dashboard.categories')->with('msg_success', 'Category Add Successfully');
+        return redirect()->route('admin.categories.index')->with('msg_success', __('lang.createdSuccessfully'));
     }
 
 
@@ -99,20 +110,11 @@ class CategoriesController extends Controller
      * @param  \App\Models\Service  $service
      * @return \Illuminate\Http\Response
      */
-    public function update(CategoryRequest $request)
+    public function update(CategoryRequest $request, Category $category)
     {
-
-        $request->merge([
-            'slug'  =>  $this->makeSlug($request->name)
-        ]);
-
-        dd($request->all());
-        
-
-        $category = Category::where('id', $request->id)->first();
         $category->update($request->all());
 
-        return redirect()->route('dashboard.categories')->with('msg_success', 'Category Updated Successfully');
+        return redirect()->route('admin.categories.index')->with('msg_success', __('lang.updatedSuccessfully'));
     }
 
     /**
@@ -120,12 +122,10 @@ class CategoriesController extends Controller
      */
     public function destroy(Category $category)
     {
-
       $category->delete();
 
-      return back()->with('msg_success', 'Category Deleted Successfully');
+      return back()->with('msg_success', __('lang.deletedSuccessfully'));
     }
-
 
 
     /**

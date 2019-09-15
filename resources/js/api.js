@@ -4,7 +4,7 @@ import axios from 'axios';
 let token = '';
 
 const dashboardURL = "http://127.0.0.1:8000/dashboard"
-// const dashboardURL = "http://offside.ml/taqiim/dashboard"
+// const dashboardURL = "http://offside.ml/widan/dashboard"
 
 export default {
     // General

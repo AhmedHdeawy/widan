@@ -7,6 +7,8 @@ use Illuminate\Notifications\Notifiable;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 
+use Image;
+
 class User extends Authenticatable
 {
     use Notifiable;
@@ -17,7 +19,7 @@ class User extends Authenticatable
      * @var array
      */
     protected $fillable = [
-        'name', 'username', 'email', 'password', 'avatar', 'location', 'status'
+        'name', 'username', 'email', 'phone', 'password', 'avatar', 'location', 'status'
     ];
 
     /**
@@ -37,39 +39,33 @@ class User extends Authenticatable
      */
     public function setPasswordAttribute($value)
     {
-        // $this->attributes['password'] = bcrypt($value);
-        $this->attributes['password'] = Hash::make($value);
+        if($value) {
+            $this->attributes['password'] = Hash::make($value);
+        }
     }
 
-    // Get Users that belongs to Client
-    public function clients()
+    /**
+     * Set Client logo
+     *  @param string $file
+     */
+    public function setAvatarAttribute($file)
     {
-      return $this->hasMany('App\Client');
+
+    	if ($file) {    		
+	        
+	        if (is_string($file)) {
+	          $this->attributes['avatar'] = $file;
+
+	        } else {
+
+	          $name =  $file->getClientOriginalName();
+	          $name = time() . '_' . $name;
+
+	          Image::make($file)->save('uploads/users/'. $name);
+
+	          $this->attributes['avatar'] = $name;
+	        }
+    	}
     }
-
-    // Get Followers to this Client
-    public function clientsFollowed()
-    {
-      return $this->belongsToMany('App\Client', 'followers', 'user_id', 'client_id');
-    }
-
-    // Get Followers to the Branch
-    public function branchesFollowed()
-    {
-      return $this->belongsToMany('App\Branch', 'followers', 'user_id', 'branch_id');
-    }
-
-    // // Get Likes that belongs to Client
-    // public function likes()
-    // {
-    //     return $this->hasMany('App\Like');
-    // }
-    //
-    // // Get DisLikes that belongs to Client
-    // public function dislikes()
-    // {
-    //     return $this->hasMany('App\Dislike');
-    // }
-
 
 }

@@ -21,7 +21,7 @@ $factory->define(App\Client::class, function (Faker $faker) {
         'description' => $faker->realText($maxNbChars = 200, $indexSize = 2),
         'address' => $faker->address,
         'phone' => $faker->phoneNumber,
-        'logo' => 'taqiim_1551538152IJZm3OyrmXsGTM1.png',
+        'logo' => 'widan_1551538152IJZm3OyrmXsGTM1.png',
         'location'  =>  'location',
         'user_id' =>  $faker->numberBetween($min = 1, $max = 19),
         'city_id' =>  1

@@ -1,87 +1,69 @@
 @extends('layouts.app')
 
-@section('navbar')
-
-    @include('layouts.navbar-main')
-
-@endsection
-
-
 @section('content')
-
-
-<!-- Start Section Sign In -->
-
-    <section class="sign-in">
-
-        <div class="container">
+<div class="container">
+    <div class="row justify-content-center align-items-center login-form">
+        <div class="col-md-8">
             
-            <h3 class="font-weight-bold main-color my-5">تسجيل دخول</h3>
+            <!--Form with header-->
+                    <form action="{{ route('login') }}" method="post">
 
+                        @csrf
 
-               {{--  <div class="communication">
+                        <div class="card border-success rounded-0">
+                            <div class="card-header p-0">
+                                <div class="bg-success text-white text-center py-2">
+                                    <h3><i class="fa fa-user"></i> {{ __('lang.loginTitle') }} </h3>
+                                    <p class="m-0">{{ __('lang.loginHint') }}</p>
+                                </div>
+                            </div>
+                            
+                            <div class="card-body p-3">
 
-                    <button type="button"><a href="#"><i class="fab fa-google"></i>تسجيل الدخول بواسطة جوجل</a></button>
+                                <!--Body-->
 
-                    <button type="button"><a href="#"><i class="fab fa-facebook-f"></i>تسجيل الدخول بواسطة فيسبوك</a></button>
+                                <div class="form-group">
+                                    <div class="input-group mb-2">
+                                        <div class="input-group-prepend">
+                                            <div class="input-group-text"><i class="fa fa-envelope text-success"></i></div>
+                                        </div>
+                                        <input type="email" class="form-control {{ $errors->first('email') ? 'is-invalid' : '' }}" id="email" name="email" value="{{ old('email') }}" placeholder="{{ __('lang.email') }}" >
+                                        @if ($errors->first('email'))
+                                            <div class="invalid-feedback">{{ $errors->first('email') }}</div>
+                                        @endif
+                                    </div>
+                                </div>
 
-                </div> --}}
+                                <div class="form-group">
+                                    <div class="input-group mb-2">
+                                        <div class="input-group-prepend">
+                                            <div class="input-group-text"><i class="fa fa-unlock text-success"></i></div>
+                                        </div>
+                                        <input type="password" class="form-control {{ $errors->first('password') ? 'is-invalid' : '' }}" id="password" name="password" placeholder="{{ __('lang.password') }}" value="{{ old('password') }}" >
+                                        @if ($errors->first('password'))
+                                            <div class="invalid-feedback">{{ $errors->first('password') }}</div>
+                                          @endif
+                                    </div>
+                                </div>
 
-                <p>
-                    @if ($errors->has('email'))
-                        <strong class="text-danger">الايميل او كلمة المرور خطأ</strong>
-                    @endif
-                </p>
+                                <div class="form-group form-check">
+                                    <input class="form-check-input" type="checkbox" name="remember" id="remember" {{ old('remember') ? 'checked' : '' }}>
+                                    <label class="form-check-label" for="remember">
+                                                {{ __('lang.rememberMe') }}
+                                    </label>
+                                </div>
+                                
 
-                <form class="form-insid" method="POST" action="{{ route('login') }}">
-                    @csrf
-    
-                    <div class="form-group px-4 mb-5">
-                        
-                        <input type="email" name="email" value="{{ old('email') }}" placeholder="البريد الالكتروني" class="form-control" required autofocus />
-                        
-                    </div>
+                                <div class="text-center">
+                                    <input type="submit" value="{{ __('lang.login') }}" class="btn btn-success btn-block rounded-0 py-2">
+                                </div>
+                            </div>
 
-                    <div class="form-group px-4">
-                        
-                        <input type="password" placeholder="كلمة المرور" class="form-control{{ $errors->has('password') ? ' is-invalid' : '' }}" name="password" required />
-
-                        @if ($errors->has('password'))
-                            <span class="invalid-feedback" role="alert">
-                                <strong>{{ $errors->first('password') }}</strong>
-                            </span>
-                        @endif
-
-                    </div>
-
-                    <div class="form-group form-check text-right px-4">
-                        <input type="checkbox" name="remember" class="form-check-input" id="remember">
-                        <label class="form-check-label" for="remember">تذكرني</label>
-                    </div>
-
-
-                    <div class="content">
-
-                    </div>
-                    
-                    <button type="submit">تسجيل الدخول</button>
-
-                </form>
-
-                <div class="parg">
-
-                    <p>هل انت مستخدم جديد؟</p>
-
-                    <a href="{{ route('register') }}">انشاء حساب</a>
-
-                </div>
-                
+                        </div>
+                    </form>
+                    <!--Form with header-->
 
         </div>
-
-    </section>
-
-<!-- Start Section  Sign In -->
-
-
+    </div>
+</div>
 @endsection

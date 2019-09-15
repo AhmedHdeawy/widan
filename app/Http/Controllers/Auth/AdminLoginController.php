@@ -26,33 +26,34 @@ class AdminLoginController extends Controller
      *
      * @var string
      */
-    protected $redirectTo = '/dashboard';
+    protected $redirectTo = '/admin';
 
-    public function showLoginForm()
+    public function showLogin()
     {
       
       if (auth()->guard('admin')->check()) {
-        return redirect()->route('dashboard');
+        return redirect()->route('admin.dashboard.index');
       }
-        return view('auth.adminLogin');
+        return view('dashboard.login');
 
     }
 
     public function login(Request $request)
     {
+        
         $remember = $request->remember;
         if (auth()->guard('admin')->attempt(['email' => $request->email, 'password' => $request->password], $remember)) {
-            return redirect()->route('dashboard');
+            return redirect()->route('admin.dashboard.index');
         }
 
-        return back()->withErrors(['email' => 'Email or password are wrong.']);
+        return back()->withErrors(['email' => __('lang.wrongData')]);
 
     }
 
     public function logout(Request $request)
     {
         auth()->guard('admin')->logout();
-        return redirect()->route('admin-login-form');
+        return redirect()->route('admin.getLogin');
 
     }
 }

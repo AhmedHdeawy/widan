@@ -24,13 +24,14 @@ class CategoryRequest extends FormRequest
     public function rules()
     {
         $rules = [
-            'name' => 'required|max:250',
-            'logo' => 'required|image',
-            'status'  =>  'required'
+            'categories_name' => 'required|max:250|unique:categories',
+            'categories_status'  =>  'required'
         ];
 
+
         if ($this->isMethod('PUT')) {
-            $rules['logo'] = 'nullable|image';
+
+            $rules['categories_name'] = 'required|max:250|unique:categories,categories_name,'. $this->segment(3) .',categories_id';
         }
 
         return $rules;

@@ -1,66 +1,76 @@
 @extends('dashboard.app')
 
 @section('breadcrumb')
-    <li class="breadcrumb-item"><a href="index.html">Home</a></li>
-    <li class="breadcrumb-item active">Index</li>
+    <li class="breadcrumb-item">{{ __('lang.home') }}</li>
+    {{-- <li class="breadcrumb-item"><a href="#">المستخدم</a></li> --}}
+    <li class="breadcrumb-item active">{{ __('lang.dashboard') }}</li>
 @endsection
 
 @section('content')
 
-<!-- Dashboard Counts Section-->
-<section class="dashboard-counts no-padding-bottom">
-    <div class="container-fluid">
-      <div class="row bg-white has-shadow">
-        <!-- Item -->
-        <div class="col-xl-3 col-sm-6">
-          <div class="item d-flex align-items-center">
-            <div class="icon bg-violet"><i class="icon-user"></i></div>
-            <div class="title"><span>New<br>Clients</span>
-              <div class="progress">
-                <div role="progressbar" style="width: 25%; height: 4px;" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100" class="progress-bar bg-violet"></div>
-              </div>
-            </div>
-            <div class="number"><strong>25</strong></div>
-          </div>
-        </div>
-        <!-- Item -->
-        <div class="col-xl-3 col-sm-6">
-          <div class="item d-flex align-items-center">
-            <div class="icon bg-red"><i class="icon-padnote"></i></div>
-            <div class="title"><span>Work<br>Orders</span>
-              <div class="progress">
-                <div role="progressbar" style="width: 25%; height: 4px;" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100" class="progress-bar bg-red"></div>
-              </div>
-            </div>
-            <div class="number"><strong>70</strong></div>
-          </div>
-        </div>
-        <!-- Item -->
-        <div class="col-xl-3 col-sm-6">
-          <div class="item d-flex align-items-center">
-            <div class="icon bg-green"><i class="icon-bill"></i></div>
-            <div class="title"><span>New<br>Invoices</span>
-              <div class="progress">
-                <div role="progressbar" style="width: 25%; height: 4px;" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100" class="progress-bar bg-green"></div>
-              </div>
-            </div>
-            <div class="number"><strong>44</strong></div>
-          </div>
-        </div>
-        <!-- Item -->
-        <div class="col-xl-3 col-sm-6">
-          <div class="item d-flex align-items-center">
-            <div class="icon bg-orange"><i class="icon-check"></i></div>
-            <div class="title"><span>Open<br>Cases</span>
-              <div class="progress">
-                <div role="progressbar" style="width: 25%; height: 4px;" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100" class="progress-bar bg-orange"></div>
-              </div>
-            </div>
-            <div class="number"><strong>35</strong></div>
-          </div>
-        </div>
-      </div>
+<h1>Hi</h1>
+
+<div class="row dashboard-statistic">
+	
+
+	<div class="col-xs-6 col-lg-3">
+        <a href="{{ route('admin.users.index') }}">        
+	        <div class="card">
+	            <div class="card-block p-a-1 clearfix">
+	                <i class="icon-people bg-primary p-a-1 font-2xl m-r-1 {{ $currentLangDir == 'rtl' ? 'pull-right' : 'pull-left' }} "></i>
+	                <div class="h5 text-primary m-b-0 m-t-h">
+	                	{{ countRows('App\User') }}
+	                </div>
+	                <div class="text-muted text-uppercase font-weight-bold font-xs">{{ __('lang.users') }}</div>
+	            </div>
+	        </div>
+        </a>
     </div>
-</section>
+    
+    <div class="col-xs-6 col-lg-3">
+    	<a href="{{ route('admin.services.index') }}">
+	        <div class="card">
+	            <div class="card-block p-a-1 clearfix">
+	                <i class="icon-layers bg-danger p-a-1 font-2xl m-r-1 {{ $currentLangDir == 'rtl' ? 'pull-right' : 'pull-left' }} "></i>
+	                <div class="h5 text-primary m-b-0 m-t-h">
+	                	{{ countRows('App\Models\Service') }}
+	                </div>
+	                <div class="text-muted text-uppercase font-weight-bold font-xs">{{ __('lang.services') }}</div>
+	            </div>
+	        </div>
+    	</a>
+    </div>
+
+    <div class="col-xs-6 col-lg-3">
+    	<a href="{{ route('admin.blogs.index') }}">
+	        <div class="card">
+	            <div class="card-block p-a-1 clearfix">
+	                <i class="icon-book-open bg-info p-a-1 font-2xl m-r-1 {{ $currentLangDir == 'rtl' ? 'pull-right' : 'pull-left' }} "></i>
+	                <div class="h5 text-primary m-b-0 m-t-h">
+	                	{{ countRows('App\Models\Blog') }}
+	                </div>
+	                <div class="text-muted text-uppercase font-weight-bold font-xs">
+	                	{{ __('lang.blogs') }}
+	                </div>
+	            </div>
+	        </div>
+    	</a>
+    </div>
+
+    <div class="col-xs-6 col-lg-3">
+        <a href="{{ route('admin.admins.index') }}">        
+	        <div class="card">
+	            <div class="card-block p-a-1 clearfix">
+	                <i class="icon-people bg-primary p-a-1 font-2xl m-r-1 {{ $currentLangDir == 'rtl' ? 'pull-right' : 'pull-left' }} "></i>
+	                <div class="h5 text-primary m-b-0 m-t-h">
+	                	{{ countRows('App\Admin') }}
+	                </div>
+	                <div class="text-muted text-uppercase font-weight-bold font-xs">{{ __('lang.admins') }}</div>
+	            </div>
+	        </div>
+        </a>
+    </div>
+
+</div>
 
 @endsection

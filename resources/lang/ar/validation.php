@@ -169,5 +169,40 @@ return [
         'size'                  => 'الحجم',
         'comment'               =>  'التعليق',
         'evaluation'            =>  'التقييم',
+        'message'               =>  'الرسالة',
+        'status'                =>  'الحالة',
+        'avatar'                =>  'الصورة الشخصية',
+
+        // Countries Validation
+        'countries_name'  =>  'اسم الدولة',
+        'countries_flag'  =>  'علم الدولة',
+        'countries_status'  =>  'حالة الدولة',
+
+        /**
+         * Services
+         */
+        'services'  =>  'الخدمات',
+        'services_logo'  =>  'صورة الخدمة',
+        'services_status'  =>  'حالة الخدمة',
+        'ar.services_title'  =>  'عنوان الخدمة العربي',
+        'en.services_title'  =>  'عنوان الخدمة الانجليزي',
+        'ar.services_desc'  =>  'وصف الخدمة العربي',
+        'en.services_desc'  =>  'وصف الخدمة الانجليزي',
+
+        /**
+         * Blogs
+         */
+        'blogs'  =>  'المقالات',
+        'blogs_logo'  =>  'صورة المقالة',
+        'blogs_status'  =>  'حالة المقالة',
+        'ar.blogs_title'  =>  'عنوان المقالة العربي',
+        'en.blogs_title'  =>  'عنوان المقالة الانجليزي',
+        'ar.blogs_desc'  =>  'وصف المقالة العربي',
+        'en.blogs_desc'  =>  'وصف المقالة الانجليزي',
+
+        'infos_value' =>  'القيمة المدخلة',
+        
     ],
+
+
 ];

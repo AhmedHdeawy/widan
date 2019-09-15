@@ -1,157 +1,106 @@
-
 <!DOCTYPE html>
-<html lang="en">
+<html lang="{{ $localeLang }}" dir="{{ $currentLangDir == 'rtl' ? 'rtl' : 'ltr' }}">
 <head>
-
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <title>TAQIIM - Dashboard</title>
-  <meta name="description" content="">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
   <meta name="robots" content="all,follow">
   <meta name="csrf-token" content="{{ csrf_token() }}">
 
-  <!-- Bootstrap CSS-->
-  <link rel="stylesheet" href="{{ asset('css/bootstrap.min.css') }}">
-  <!-- Font Awesome -->
-  <link rel="shortcut icon" href="{{ asset('vendor/font-awesome/css/all.min.css') }}">
+  <!-- <link rel="shortcut icon" href="assets/ico/favicon.png"> -->
 
-
-  <!-- Fontastic Custom icon font-->
-  <link rel="stylesheet" href="{{ asset('css/fontastic.css') }}">
-  
-  <!-- Google fonts - Poppins -->
-  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Poppins:300,400,700">
-  
-  <!-- theme stylesheet-->
-  <link rel="stylesheet" href="{{ asset('css/style.default.css') }}" id="theme-stylesheet">
-  
-  <!-- Select2-->
-  <link rel="stylesheet" href="{{ asset('css/select2.min.css') }}">
-
-  <!-- Custom stylesheet - for your changes-->
-  <link rel="stylesheet" href="{{ asset('css/custom.css') }}">
+  <title>{{ __('lang.widanAdminPanel') }}</title>
   
 
-  <!-- Tweaks for older IEs--><!--[if lt IE 9]>
-  <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
-  <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script><![endif]-->
+  <!-- Fonts CSS-->
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Tajawal:400,500,700,800,900">
+  <link rel="stylesheet" href="{{ asset('dashboard/css/font-awesome.min.css') }}">
+  
+
+  <!-- Icons CSS-->
+  <link rel="stylesheet" href="{{ asset('dashboard/css/simple-line-icons.css') }}">
+  
+  <!-- Styles CSS-->
+  @if($currentLangDir == 'rtl')
+    <link rel="stylesheet" href="{{ asset('dashboard/css/style-ar.css') }}">
+  @else
+    <link rel="stylesheet" href="{{ asset('dashboard/css/style-en.css') }}">
+  @endif
+
+  {{-- Plugins --}}
+  <link rel="stylesheet" href="{{ asset('dashboard/css/alertify.min.css') }}">
+  
+  
+  <!-- Custom CSS-->
+    <link rel="stylesheet" href="{{ asset('dashboard/css/custom.css') }}">
+    
+  @if($currentLangDir == 'rtl')
+    <link rel="stylesheet" href="{{ asset('dashboard/css/custom-ar.css') }}">
+  @else
+    <link rel="stylesheet" href="{{ asset('dashboard/css/custom-en.css') }}">
+  @endif
 
 </head>
-<body>
 
-  <div class="page home-page">
+
+<body class="navbar-fixed sidebar-nav fixed-nav">
+
    
     <!-- Main Navbar-->
-      <header class="header">
-        <nav class="navbar">
-          <!-- Search Box-->
-          <div class="search-box">
-            <button class="dismiss"><i class="icon-close"></i></button>
-            <form id="searchForm" action="#" role="search">
-              <input type="search" placeholder="What are you looking for..." class="form-control">
-            </form>
-          </div>
-          <div class="container-fluid">
-            <div class="navbar-holder d-flex align-items-center justify-content-between">
-              <!-- Navbar Header-->
-              <div class="navbar-header">
-                <!-- Navbar Brand --><a href="index.html" class="navbar-brand d-none d-sm-inline-block">
-                  <div class="brand-text d-none d-lg-inline-block"><span>Taqiim </span><strong>Dashboard</strong></div>
-                  <div class="brand-text d-none d-sm-inline-block d-lg-none"><strong>BD</strong></div></a>
-                <!-- Toggle Button--><a id="toggle-btn" href="#" class="menu-btn active"><span></span><span></span><span></span></a>
-              </div>
-              <!-- Navbar Menu -->
-              <ul class="nav-menu list-unstyled d-flex flex-md-row align-items-md-center">
-                <!-- Search-->
-                <li class="nav-item d-flex align-items-center"><a id="search" href="#"><i class="icon-search"></i></a></li>
-                <!-- Logout    -->
-                <li class="nav-item">
-
-                  <a href="{{ route('admin-logout') }}" class="nav-link logout"> 
-                    <span class="d-none d-sm-inline">Logout</span>
-                    <i class="fas fa-sign-out-alt"></i>
-                  </a>
-                </li>
-              </ul>
-            </div>
-          </div>
-        </nav>
-      </header>
+    @include('dashboard.includes.navbar')
     <!-- End / Main Navbar-->
 
+
+    <!-- Main Sidebar-->
+    @include('dashboard.includes.sidebar')
+    <!-- End / Main Sidebar-->
+
     {{-- Page Content --}}
-    <div class="page-content d-flex align-items-stretch">
+    <main class="main">
+      <!-- Breadcrumb -->
+        <ol class="breadcrumb">
+          @yield('breadcrumb')
+        </ol>
+      <!-- End / Breadcrumb -->
         
-        <!-- Side Navbar -->
-          @include('dashboard.sidebar')
-        <!-- End / Side Navbar -->
-
-        <div class="content-inner">
-          
-          <!-- Breadcrumb -->
-            <div class="breadcrumb-holder container-fluid">
-              <ul class="breadcrumb">
-                  @yield('breadcrumb')
-              </ul>
-            </div>
-          <!-- End / Breadcrumb -->
-
-            
-          {{-- Page Content --}}
-            <main>            
+      {{-- Page Content --}}
+        <div class="container-fluid">
+          <div class="animated fadeIn">
               @yield('content')
-            </main>
-          {{-- End / Page Content --}}
-
-
-          <!-- Page Footer-->
-            <footer class="main-footer">
-              <div class="container-fluid">
-                <div class="row">
-                  <div class="col-sm-6">
-                    <p>Your company &copy; 2017-2019</p>
-                  </div>
-                  <div class="col-sm-6 text-right">
-                    <p>Design by <a href="https://bootstrapious.com/admin-templates" class="external">Bootstrapious</a></p>
-                    <!-- Please do not remove the backlink to us unless you support further theme's development at https://bootstrapious.com/donate. It is part of the license conditions. Thank you for understanding :)-->
-                  </div>
-                </div>
-              </div>
-            </footer>
-          <!-- End / Page Footer-->
-
+          </div>
         </div>
+      {{-- End / Page Content --}}
+    </main>
 
+    {{-- Footer --}}
+    <footer class="footer">
+        <span class="pull-left">
+            <a href="http://coreui.io">تقييم</a> &copy; {{ date('Y') }}
+        </span>
 
-
-    </div>
-
-  </div>
-
+        <span class="pull-right">
+            بواسطة <a href="http://coreui.io">CoreUI</a>
+        </span>
+    </footer>
   
-    <!-- Javascript files-->
+    <!-- Bootstrap and necessary plugins -->
+    <script src="{{ asset('dashboard/js/libs/jquery.min.js') }}"></script>
+    <script src="{{ asset('dashboard/js/libs/tether.min.js') }}"></script>
+    <script src="{{ asset('dashboard/js/libs/bootstrap.min.js') }}"></script>
+    <script src="{{ asset('dashboard/js/libs/pace.min.js') }}"></script>
     
-    <script src="{{ asset('js/jquery-3.min.js') }}"></script>
-    <script src="{{ asset('js/popper.min.js') }}"></script>
-    <script src="{{ asset('js/bootstrap.min.js') }}"></script>
-    <script src="{{ asset('vendor/font-awesome/js/all.min.js') }}"></script>
-    <script src="{{ asset('js/select2.min.js') }}"></script>
-    <script src="{{ asset('js/custom.js') }}"></script>
+    <!-- CoreUI main scripts -->
+    <script src="{{ asset('dashboard/js/app.js') }}"></script>
+
+    
+    <!-- Plugins and scripts required by this views -->
+    <script src="{{ asset('dashboard/js/libs/alertify.min.js') }}"></script>
+
+    <!-- Custom scripts required by this view -->
+    <script src="{{ asset('dashboard/js/views/main.js') }}"></script>
 
 
-    <!-- Google Analytics: change UA-XXXXX-X to be your site's ID.-->
-   {{--  <script>
-      (function(b,o,i,l,e,r){b.GoogleAnalyticsObject=l;b[l]||(b[l]=
-      function(){(b[l].q=b[l].q||[]).push(arguments)});b[l].l=+new Date;
-      e=o.createElement(i);r=o.getElementsByTagName(i)[0];
-      e.src='//www.google-analytics.com/analytics.js';
-      r.parentNode.insertBefore(e,r)}(window,document,'script','ga'));
-      ga('create','UA-XXXXX-X');ga('send','pageview');
-    </script>
-   --}}
-
+    <script src="{{ asset('dashboard/js/custom.js') }}"></script>
 
 </body>
 </html>

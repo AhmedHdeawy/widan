@@ -64,8 +64,10 @@ class UserLoginController extends Controller
      */
     protected function validator(array $data)
     {
+        
         return Validator::make($data, [
             'name' => ['required', 'string', 'max:255'],
+            'phone' => ['required', 'string', 'max:255'],
             'username' => ['required', 'string', 'max:255', 'unique:users'],
             'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
             'password' => ['required', 'string', 'min:6', 'confirmed'],
@@ -104,7 +106,10 @@ class UserLoginController extends Controller
 
     public function logout(Request $request)
     {
-        auth()->logout();
+        dd("lo");
+        // auth()->logout();
+        auth()->guard('user')->logout()
+        
         return redirect()->route('user-login-form');
 
     }

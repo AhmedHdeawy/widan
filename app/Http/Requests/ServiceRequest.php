@@ -3,6 +3,7 @@
 namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
+use APP\Models\Language;
 
 class ServiceRequest extends FormRequest
 {
@@ -25,15 +26,21 @@ class ServiceRequest extends FormRequest
     {
 
         $rules = [
-            'name'          => 'required|max:191',
-            'price'         => 'numeric',
-            'description'   => 'required|min:2',
-            'details'       => 'required|min:2',
-            'currency'      => '',
-            'status'        => 'required',
-            'branch_id'       => 'required|numeric',
+            'services_status'  =>  'required',
+            'services_logo'  =>  'required|image'
         ];
 
+        $languages = Language::active()->get();
+
+        foreach ($languages as $languag) {
+
+            $rules[ $languag->locale. '.services_title' ] = 'required|max:250';
+            $rules[ $languag->locale. '.services_desc' ] = 'required';
+        }
+
+        if ($this->isMethod('PUT')) {
+            $rules['services_logo']  =  'nullable|image';
+        }
 
         return $rules;
     }

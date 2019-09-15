@@ -143,6 +143,72 @@ return [
     |
     */
 
-    'attributes' => [],
+    'attributes' => [
+
+        'name'                  => 'Name',
+        'username'              => 'Username',
+        'email'                 => 'Email',
+        'first_name'            => 'First Name',
+        'last_name'             => 'Last Name',
+        'password'              => 'Password',
+        'password_confirmation' => 'Password Confirmation',
+        'city'                  => 'City',
+        'country'               => 'Country',
+        'address'               => 'Address',
+        'phone'                 => 'Phone',
+        'mobile'                => 'Mobile',
+        'age'                   => 'Age',
+        'sex'                   => 'Sex',
+        'gender'                => 'Gender',
+        'day'                   => 'Day',
+        'month'                 => 'Month',
+        'year'                  => 'Year',
+        'hour'                  => 'Hour',
+        'minute'                => 'Minute',
+        'second'                => 'Second',
+        'title'                 => 'Title',
+        'content'               => 'Content',
+        'description'           => 'Description',
+        'excerpt'               => 'Excerpt',
+        'date'                  => 'Date',
+        'time'                  => 'Time',
+        'available'             => 'Available',
+        'size'                  => 'Size',
+        'comment'               =>  'Comment',
+        'evaluation'            =>  'Evaluation',
+        'message'               =>  'Message',
+        'status'                =>  'Status',
+        'avatar'                =>  'Avatar',
+
+        // Countries Validation
+        'countries_name'  =>  'Countries Name',
+        'countries_flag'  =>  'Countries Flag',
+        'countries_status'  =>  'Countries Status',
+
+        /**
+         * Services
+         */
+        'services'  =>  'Services',
+        'services_logo'  =>  'Services Logo',
+        'services_status'  =>  'Services Status',
+        'ar.services_title'  =>  'Arabic Services Title',
+        'en.services_title'  =>  'English Services Title',
+        'ar.services_desc'  =>  'Arabic Services Description',
+        'en.services_desc'  =>  'English Services Description',
+
+        /**
+         * Blogs
+         */
+        'blogs'  =>  'Blogs',
+        'blogs_logo'  =>  'Blogs Logo',
+        'blogs_status'  =>  'Blogs Status',
+        'ar.blogs_title'  =>  'Arabic Blogs Title',
+        'en.blogs_title'  =>  'English Blogs Title',
+        'ar.blogs_desc'  =>  'Arabic Blogs Description',
+        'en.blogs_desc'  =>  'English Blogs Description',
+
+        'infos_value' =>  'Entered Value',
+
+    ],
 
 ];
