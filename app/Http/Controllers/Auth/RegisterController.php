@@ -28,7 +28,7 @@ class RegisterController extends Controller
      *
      * @var string
      */
-    protected $redirectTo = '/';
+    protected $redirectTo = '/booking';
 
     /**
      * Create a new controller instance.
@@ -66,8 +66,10 @@ class RegisterController extends Controller
      */
     protected function create(array $data)
     {
+        
         return User::create([
             'name' => $data['name'],
+            'username'  =>  mt_rand(1000000, mt_getrandmax()),
             'phone' => $data['phone'],
             'email' => $data['email'],
             'password' => $data['password'],

@@ -36,9 +36,15 @@ Route::group([ 'prefix' =>	'/' ], function(){
     Route::post('contact-us', 'HomeController@postContactUs')->name('postContactUs');
 
     Route::group([ 'middleware' =>  'auth' ], function(){
+        
         // Boking
         Route::get('booking', 'HomeController@booking')->name('booking');
         Route::post('booking', 'HomeController@postBooking')->name('postBooking');
+
+        // Profile
+        Route::get('profile/{username}', 'HomeController@profile')->name('profile');
+        Route::post('profile', 'HomeController@updateProfile')->name('updateProfile');
+
     });
 
 });
@@ -60,7 +66,7 @@ Route::prefix('admin')
 		Route::get('/', 'Dashboard\DashboardController@index')->name('dashboard.index');
 
         // Bookings Routes
-        Route::resource('bookings', 'Dashboard\BookingsController')->except('create', 'store', 'edit', 'update', 'delete');
+        Route::resource('bookings', 'Dashboard\BookingsController')->except('edit', 'update', 'destroy');
         Route::get('bookings/doneBooking/{booking}', 'Dashboard\BookingsController@doneBooking')->name('bookings.doneBooking');
     	
         // Services Routes
@@ -76,7 +82,7 @@ Route::prefix('admin')
     	Route::resource('infos', 'Dashboard\InfosController');
 
     	// Settings Routes
-    	Route::resource('settings', 'Dashboard\SettingsController')->except('create', 'store', 'delete');
+    	Route::resource('settings', 'Dashboard\SettingsController')->except('create', 'store', 'destroy');
 
         // ContactUs Routes
         Route::resource('contactus', 'Dashboard\ContactUsController');

@@ -43,7 +43,7 @@
 
 				@if(auth()->check())
 				      <li class="nav-item">
-				        <a class="nav-link fb-500" href="/">
+				        <a class="nav-link fb-500" href="{{ route('profile', auth()->user()->username ) }}">
 				        	<img src="{{ auth()->user()->avatar ? asset('uploads/users/' . auth()->user()->avatar) : asset('front/images/man.png')  }}" class="img-fluid navbar-profile mx-1">
 				        	{{ auth()->user()->name }}
 				        </a>

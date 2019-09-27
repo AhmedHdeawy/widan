@@ -71,6 +71,8 @@ return [
     'day'       =>  'Day',
     'time'       =>  'Time',
     'notes'     =>  'Notes',
+    'profileTitle'    =>  'Update Your Profile',
+    'profileHint'     =>  'Update Your Profile Easly. ',
 
 
     'createdSuccessfully'   =>  'Created Successfully',
@@ -99,6 +101,8 @@ return [
     'whoWe' =>  'Who We Are',
     'contactUsTitle'  =>  'Contact Us',
     'contactUsMessage'  =>  'Send your Complaints or your Suggestion',
+    'yourBooking'   =>  'Your Old Booking',
+    'yourBookingHint'   =>  'your old booking with all details',
 
 
 

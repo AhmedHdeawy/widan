@@ -6,7 +6,7 @@
         <div class="col-md-8">
             
             <!--Form with header-->
-                    <form action="{{ route('register') }}" method="post">
+                    <form action="{{ route('register') }}" method="post" enctype="multipart/form-data">
 
                         @csrf
 

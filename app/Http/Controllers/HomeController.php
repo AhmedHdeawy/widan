@@ -12,6 +12,7 @@ use App\Models\Info;
 use App\Models\Setting;
 use App\Models\ContactUs;
 use App\Models\Booking;
+use App\User;
 
 class HomeController extends Controller
 {
@@ -144,7 +145,7 @@ class HomeController extends Controller
 
 
     /**
-     * Show the ZBooking page.
+     * Show the Booking page.
      *
      * @return \Illuminate\Contracts\Support\Renderable
      */
@@ -219,7 +220,7 @@ class HomeController extends Controller
 
 
     /**
-     * Post the ContactUs Form.
+     * Post the Booking Form.
      *
      * @return \Illuminate\Http\Response
      */
@@ -260,6 +261,56 @@ class HomeController extends Controller
             'time_from' => 'required|max:100|min:2',
             'time_to' => 'required|max:100|after:time_from',
             'notes' => 'string|nullable',
+
+        ])->validate();   
+    }
+
+
+
+    /**
+     * Show the Profile page.
+     *
+     * @return \Illuminate\Contracts\Support\Renderable
+     */
+    public function profile(Request $request, $username)
+    {
+        return view('front.profile');
+    }
+
+
+    /**
+     * Post the Profile Form.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function updateProfile(Request $request)
+    {        
+        // Validate Form
+        $this->validateProfile($request);
+
+        $user = User::findOrFail(auth()->user()->id);
+
+        // Update User Profile
+        $user->update($request->all());
+
+        return redirect()->route('profile', auth()->user()->username)->with('status', __('lang.updatedSuccessfully'));
+
+    }
+
+
+    /**
+     * Validate Form Request.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function validateProfile(Request $request)
+    {
+        Validator::make($request->all(), [
+            'name'      => 'required|string|max:100|min:2',
+            'email'     => 'required|max:100|min:2|email|unique:users,email,'. auth()->user()->id .',id',
+            'phone'     => 'required|max:100|min:2',
+            'password'  => 'confirmed',
+            'avatar'    => 'nullable',
 
         ])->validate();   
     }

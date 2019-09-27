@@ -77,4 +77,17 @@ class User extends Authenticatable
         return $this->hasMany('App\Models\Booking', 'user_id', 'id');
     }
 
+
+    /**
+     * Scope a query to fetch Active data only.
+     *
+     * @param \Illuminate\Database\Eloquent\Builder $query
+     * 
+     * @return \Illuminate\Database\Eloquent\Builder
+     */
+    public function scopeActive($query)
+    {
+        return $query->where('status', '1');
+    }
+
 }

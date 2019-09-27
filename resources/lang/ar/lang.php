@@ -73,10 +73,13 @@ return [
     'notes'     =>  'ملاحظات',
     'hasNoUser' =>  'ليس لديك حساب ؟',
     'hasUser' =>  'هل انت عضو معنا ؟',
+    'profileTitle'    =>  'تحديث بياناتك',
+    'profileHint'     =>  'حدث بياناتك بكل سهوله. ',
+
     
 
     'createdSuccessfully'   =>  'تمت الاضافة بنجاح',
-    'updatedSuccessfully'   =>  'تم التعديل بنجاح',
+    'updatedSuccessfully'   =>  'تم التحديث بنجاح',
     'deletedSuccessfully'   =>  'تم الحذف بنجاح',
 
     'search'    =>  'بحث',
@@ -101,6 +104,8 @@ return [
     'whoWe' =>  'من نحن',
     'contactUsTitle'  =>  'اتصل بنا',
     'contactUsMessage'  =>  'ارسل شكواك او مقترحاتك',
+    'yourBooking'   =>  'حجوزاتك السابقة',
+    'yourBookingHint'   =>  'حجوزاتك السابقة لدينا بكل تفاصيلها',
 
 
     /**

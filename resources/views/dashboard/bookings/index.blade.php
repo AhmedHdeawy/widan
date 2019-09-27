@@ -63,10 +63,10 @@
       <div class="card">
           <div class="card-header">
               <i class="fa fa-align-justify"></i> {{ __('lang.bookings') }}
-{{-- 
+
               <a href="{{ route('admin.bookings.create') }}" class="btn btn-success btn-create {{ $currentLangDir == 'rtl' ? 'pull-left' : 'pull-right' }}">
                 <i class="icon-plus"></i> {{ __('lang.create') }}
-              </a> --}}
+              </a>
           </div>
 
           <div class="card-block">

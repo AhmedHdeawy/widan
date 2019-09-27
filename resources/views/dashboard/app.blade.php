@@ -75,11 +75,11 @@
     {{-- Footer --}}
     <footer class="footer">
         <span class="pull-left">
-            <a href="http://coreui.io">تقييم</a> &copy; {{ date('Y') }}
+            <a href="/">HighDevs</a> &copy; {{ date('Y') }}
         </span>
 
         <span class="pull-right">
-            بواسطة <a href="http://coreui.io">CoreUI</a>
+             <a href="http://coreui.io">CoreUI</a>
         </span>
     </footer>
   
