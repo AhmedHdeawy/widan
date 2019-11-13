@@ -73,7 +73,8 @@ return [
     'notes'     =>  'Notes',
     'profileTitle'    =>  'Update Your Profile',
     'profileHint'     =>  'Update Your Profile Easly. ',
-
+    'hasNoUser' =>  "Don't have account ?",
+    'hasUser' =>  'I have account',
 
     'createdSuccessfully'   =>  'Created Successfully',
     'updatedSuccessfully'   =>  'Updated Successfully',

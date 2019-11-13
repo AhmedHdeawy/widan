@@ -73,7 +73,7 @@ class RegisterController extends Controller
             'phone' => $data['phone'],
             'email' => $data['email'],
             'password' => $data['password'],
-            'avatar' => $data['avatar'],
+            'avatar' => isset($data['avatar']) ?  $data['avatar'] : null,
         ]);
     }
 }

