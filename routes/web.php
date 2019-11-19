@@ -40,6 +40,7 @@ Route::group([ 'prefix' =>	'/' ], function(){
         // Boking
         Route::get('booking', 'HomeController@booking')->name('booking');
         Route::post('booking', 'HomeController@postBooking')->name('postBooking');
+        Route::post('dayTimes', 'HomeController@dayTimes')->name('dayTimes');
 
         // Profile
         Route::get('profile/{username}', 'HomeController@profile')->name('profile');
@@ -66,9 +67,13 @@ Route::prefix('admin')
 		Route::get('/', 'Dashboard\DashboardController@index')->name('dashboard.index');
 
         // Bookings Routes
-        Route::resource('bookings', 'Dashboard\BookingsController')->except('edit', 'update', 'destroy');
+        Route::resource('bookings', 'Dashboard\BookingsController')->except('create', 'store', 'edit', 'update', 'destroy');
         Route::get('bookings/doneBooking/{booking}', 'Dashboard\BookingsController@doneBooking')->name('bookings.doneBooking');
     	
+        // Days Routes
+        Route::resource('days', 'Dashboard\DaysController')->except('edit', 'update', 'destroy');
+        Route::get('deleteTime/{time}', 'Dashboard\DaysController@deleteTime')->name('days.deleteTime');
+
         // Services Routes
     	Route::resource('services', 'Dashboard\ServicesController');
 
@@ -79,7 +84,7 @@ Route::prefix('admin')
         Route::resource('sliders', 'Dashboard\SlidersController');
 
        	// Infos Routes
-    	Route::resource('infos', 'Dashboard\InfosController');
+    	Route::resource('infos', 'Dashboard\InfosController')->except('create', 'store', 'destroy');
 
     	// Settings Routes
     	Route::resource('settings', 'Dashboard\SettingsController')->except('create', 'store', 'destroy');

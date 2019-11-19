@@ -207,6 +207,7 @@ return [
         'en.blogs_desc'  =>  'وصف المقالة الانجليزي',
 
         'infos_value' =>  'القيمة المدخلة',
+        'settings_value'    =>  'القيمة المدخلة',
         
     ],
 

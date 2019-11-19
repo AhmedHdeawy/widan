@@ -16,9 +16,6 @@
       <div class="card">
           <div class="card-header">
               <i class="fa fa-align-justify"></i> {{ __('lang.infos') }}
-              <a href="{{ route('admin.infos.create') }}" class="btn btn-success btn-create {{ $currentLangDir == 'rtl' ? 'pull-left' : 'pull-right' }}">
-                <i class="icon-plus"></i> {{ __('lang.create') }}
-              </a>
           </div>
 
           <div class="card-block">
@@ -92,15 +89,6 @@
                                       <a href="{{ route('admin.infos.edit', $info->id) }}" class="btn btn-warning btn-sm">
                                         <i class="icon-pencil"></i>
                                       </a>
-
-                                      <form method="post" action="{{ route('admin.infos.destroy', $info->id) }}" class="d-inline-block">
-                                        @csrf
-                                        @method('delete')
-
-                                        <button class="btn btn-danger btn-sm delete-form" type="submit">
-                                          <i class="icon-trash"></i>
-                                        </button>
-                                      </form>
                                     @endif
 
                                   </td>

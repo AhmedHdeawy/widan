@@ -3,6 +3,7 @@
 return [
 
     'maintenanceMode'           =>  'عذراً الموقع متوقف حالياً',
+    'welcomeDashboard'          =>  'مرحبا بك في لوحة تحكم الموقع',
     'websiteName'               =>  'ويدان لخدمات التنظيف',
     'home'	                    =>	'الرئيسية',
     'dashboard'                 =>  'لوحة التحكم',
@@ -75,6 +76,11 @@ return [
     'hasUser' =>  'هل انت عضو معنا ؟',
     'profileTitle'    =>  'تحديث بياناتك',
     'profileHint'     =>  'حدث بياناتك بكل سهوله. ',
+    'days'      =>  'الايام',
+    'times'      =>  'الفترات',
+    'daysTimes' =>  'الايام والفترات',
+    'daysTimesExist'    =>  'هذا اليوم وهذه الفتره موجوده من قبل',
+    'workers'   =>  'عدد العاملات',
 
     
 
@@ -100,7 +106,7 @@ return [
     'register'    =>  'تسجيل',
     'latestArticle' =>  'أحدث المقالات',
     'copyRight' =>  'جميع الحقوق محفوظه لموقع ويدان',
-    'poweredBy' =>  'تصميم وبرمجة : HighDevs',
+    'poweredBy' =>  'تطوير بواسطة:',
     'whoWe' =>  'من نحن',
     'contactUsTitle'  =>  'اتصل بنا',
     'contactUsMessage'  =>  'ارسل شكواك او مقترحاتك',
@@ -118,6 +124,8 @@ return [
     'street'      =>  'اسم الشارع',
     'time_from'     =>  'وقت البداية',
     'time_to'     =>  'وقت النهاية',
+    'price'     =>  'السعر',
+    'nom_of_hours'  =>  'عدد الساعات',
     'personalDetails'   =>  'البيانات الشخصية',
     'locationDetails'   =>  'بيانات المكان',
     'bookingDetails'   =>  'بيانات الحجز',
@@ -130,6 +138,12 @@ return [
     'Thu'       =>  'الخميس',
     'bookingDone'   =>  'لقت تم حجز طلبك وسيتم التواصل معك في اقرب وقت',
     'selectService' =>  'اختر الخدمة',
+    'selectDayYouWant'  =>  'اختر اليوم الذي يناسبك',
+    'availableTimes'  =>  'الاوقات المتاحه',
+    'mustSelectDay'     =>  'يجب عليك اختيار يوم مناسب لاستكمال الحجز',
+    'mustSelectTime'    =>  'يجب عليك اختيار وقت من الاوقات المتاحة لاستكمال الحجز',
+    'invoiceDetails'    =>  'تفاصيل الدفع',
+    'notAvailableTimes'     =>  'لايوجد اوقات متاحة في هذا اليوم, تم حجزها بالكامل',
     
     /**
      * Services
@@ -174,6 +188,7 @@ return [
     'google'  =>  'رابط جوجل',
     'address'  =>  'العنوان',
     'about'  =>  'نبذه عنا',
+    'hour_price'    =>  'سعر الساعة',
 
 
     /**

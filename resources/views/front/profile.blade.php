@@ -31,16 +31,20 @@
                                         {{ $booking->city . ' - ' . $booking->building . ' - ' . $booking->unit . ' - ' . $booking->street }}
                                     </li>
                                     <li class="list-group-item">
-                                        <b>{{ __('lang.date') }} :</b>
-                                        {{ $booking->day }}
+                                        <b>{{ __('lang.day') }} :</b>
+                                        {{ $booking->day->day }}
                                     </li>
                                     <li class="list-group-item">
                                         <b>{{ __('lang.time_from') }} :</b>
-                                        {{ $booking->time_from }}
+                                        {{ $booking->time->time_from }}
                                     </li>
                                     <li class="list-group-item">
                                         <b>{{ __('lang.time_to') }} :</b>
-                                        {{ $booking->time_to }}
+                                        {{ $booking->time->time_to }}
+                                    </li>
+                                    <li class="list-group-item">
+                                        <b>{{ __('lang.price') }} :</b>
+                                        {{ $booking->price }}
                                     </li>
                                     <li class="list-group-item">
                                         <b>{{ __('lang.notes') }} :</b>

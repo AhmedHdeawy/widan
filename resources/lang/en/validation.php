@@ -214,6 +214,7 @@ return [
         'en.blogs_desc'  =>  'English Blogs Description',
 
         'infos_value' =>  'Entered Value',
+        'settings_value'    =>  'value entered',
 
     ],
 

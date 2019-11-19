@@ -44,7 +44,7 @@
 
 <body>
 
-    <div class="container">
+    <div class="container login-dash-page">
         <div class="row">
             <div class="col-md-8 m-x-auto pull-xs-none vamiddle">
                 <div class="card-group ">
@@ -55,10 +55,10 @@
 
                             <p>
                                 @if ($errors->has('email'))
-                                        <span class="invalid-feedback text-danger">
-                                            <strong>{{ $errors->first('email') }}</strong>
-                                        </span>
-                                    @endif
+                                    <span class="invalid-feedback text-danger">
+                                        <strong>{{ $errors->first('email') }}</strong>
+                                    </span>
+                                @endif
                             </p>
 
                             <form method="POST" action="{{ route('admin.postLogin') }}">

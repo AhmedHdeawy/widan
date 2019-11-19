@@ -14,6 +14,12 @@
             </li>
 
             <li class="nav-item">
+                <a class="nav-link {{ $segment == 'days' ? 'active' : '' }}" href="{{ route('admin.days.index') }}">
+                    <i class="icon-calendar"></i> {{ __('lang.daysTimes') }} 
+                </a>
+            </li>
+
+            <li class="nav-item">
                 <a class="nav-link {{ $segment == 'services' ? 'active' : '' }}" href="{{ route('admin.services.index') }}">
                     <i class="icon-layers"></i> {{ __('lang.services') }} 
                 </a>

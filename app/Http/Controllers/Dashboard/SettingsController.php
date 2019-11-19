@@ -59,7 +59,7 @@ class SettingsController extends Controller
      */
     public function update(SettingRequest $request, Setting $setting)
     {
-
+       
         $setting = Setting::where('settings_key', $request->settings_key)->first();
         $setting->settings_value = $request->settings_value;
         $setting->save();

@@ -65,7 +65,7 @@
                         {{ __('lang.day') }} :
                     </div>
                     <div class="col-sm-10">
-                        {{ $booking->day }}
+                        {{ $booking->day->day }}
                     </div>
                 </div>
 
@@ -74,7 +74,16 @@
                         {{ __('lang.time') }} :
                     </div>
                     <div class="col-sm-10">
-                        {{ $booking->time_from  }} - {{ $booking->time_to }}
+                        {{ $booking->time->time_from  }} - {{ $booking->time->time_to }}
+                    </div>
+                </div>
+
+                <div class="row show-details-row">
+                    <div class="col-sm-2">
+                        {{ __('lang.price') }} :
+                    </div>
+                    <div class="col-sm-10">
+                        {{ $booking->price }}
                     </div>
                 </div>
 
@@ -83,7 +92,7 @@
                         {{ __('lang.notes') }} :
                     </div>
                     <div class="col-sm-10">
-                        {{ $booking->notes }}
+                        {{ $booking->notes ? $booking->notes : '--' }}
                     </div>
                 </div>
 

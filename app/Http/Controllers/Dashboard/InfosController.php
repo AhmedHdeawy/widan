@@ -77,42 +77,4 @@ class InfosController extends Controller
         return view('dashboard.infos.show', compact('info', 'showLang'));
     }
 
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\Models\Info  $info
-     * @return \Illuminate\Http\Response
-     */
-    public function edit(Info $info)
-    {
-      return view('dashboard.infos.edit', compact('info'));
-    }
-
-    
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \App\Modules\Admin\Http\Requests\InfoRequest  $request
-     * @param  \App\Models\Info  $info
-     * @return \Illuminate\Http\Response
-     */
-    public function update(InfoRequest $request, Info $info)
-    {
-        $info->update($request->all());
-
-        return redirect()->route('admin.infos.index')->with('msg_success', __('lang.updatedSuccessfully'));
-    }
-
-    /**
-     * Delete the info
-     */
-    public function destroy(Info $info)
-    {        
-        // Delete Record
-        $info->delete();
-
-      return back()->with('msg_success', __('lang.deletedSuccessfully'));
-    }
-
 }

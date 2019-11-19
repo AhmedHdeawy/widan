@@ -12,6 +12,8 @@ use App\Models\Info;
 use App\Models\Setting;
 use App\Models\ContactUs;
 use App\Models\Booking;
+use App\Models\Day;
+use App\Models\Time;
 use App\User;
 
 class HomeController extends Controller
@@ -155,69 +157,9 @@ class HomeController extends Controller
         $services = Service::active()->get();
 
         $days = $this->getBookingDays();
-
-        $times = $this->getBookingTime();
-
-        return view('front.booking', compact('days', 'times', 'services'));
-    }
-
-    /**
-     * Function to Get Available Booking Days
-     */
-    private function getBookingDays()
-    {
-        // Get Week Days
-        $datetime = new \DateTime();
-        // Exclude Today from Days
-        $datetime->add( date_interval_create_from_date_string('1 days') );
         
-        $days = [];
-
-        for ($i=0; $i < 20; $i++) { 
-                
-            // Exclude Friday from each week
-            if ($datetime->format('N') == 5){
-                // add new day after Friday
-                $datetime->add( date_interval_create_from_date_string('1 days') );
-                continue;
-
-            } else {
-
-                // Create Option for Select Tag
-                $days[] = 
-                '<option value="'.$datetime->format('Y-m-d').'">' . __('lang.'.$datetime->format('D')) . ' - ' .$datetime->format('Y/m/d') . '</option>';
-
-                // Add New Day
-                $datetime->add( date_interval_create_from_date_string('1 days') );
-            }
-        }
-
-        return $days;
+        return view('front.booking', compact('days', 'services'));
     }
-
-    /**
-     * Function to Get Available Booking Time
-     */
-    private function getBookingTime()
-    {
-        // Get Week Days
-        $datetime = new \DateTime('08:00:00');
-        $time = [];
-
-        for ($i=0; $i <= 12; $i++) { 
-                
-            // Create Option for Select Tag
-                $time[] = 
-                '<option value="'.$datetime->format('H:i:s').'">' . $datetime->format('H A') . '</option>';
-
-                // Add Hour
-                $datetime->add( new \DateInterval('PT1H') );
-                // $datetime->add( new \DateInterval('PT30M') );
-        }
-
-        return $time;
-    }
-
 
     /**
      * Post the Booking Form.
@@ -226,18 +168,33 @@ class HomeController extends Controller
      */
     public function postBooking(Request $request)
     {        
+
+        // dd($request->all());
+
         // Validate Form
         $this->validateBooking($request);
 
+        // If User is Authenticated
+        if (auth()->check()) {
+            $request->merge([
+                'user_id'   =>  auth()->user()->id
+            ]);
+        }
+
+        // Calculate Price
         $request->merge([
-            'user_id'   =>  auth()->user()->id
+            'price'   =>  $this->calculatePrice($request->times_id)
         ]);
 
         // Create New Row
-        Booking::create($request->all());
+        $booking = Booking::create($request->all());
+
+        // Update Time booking count by one
+        $givenTime = $booking->time;
+        $givenTime->booking_count = $booking->time->booking_count + 1;
+        $givenTime->save();
 
         return redirect()->route('booking')->with('status', __('lang.bookingDone'));
-
     }
 
 
@@ -257,14 +214,87 @@ class HomeController extends Controller
             'building' => 'required|max:100|min:2',
             'unit' => 'required|max:100|min:1',
             'street' => 'required|max:100|min:2',
-            'day' => 'required|max:100|min:2',
-            'time_from' => 'required|max:100|min:2',
-            'time_to' => 'required|max:100|after:time_from',
+            'days_id' => 'required|numeric',
+            'times_id' => 'required|numeric',
             'notes' => 'string|nullable',
 
         ])->validate();   
     }
 
+    /**
+     * Function to Get Available Booking Days
+     */
+    private function getBookingDays()
+    {
+        // Get all days that greater than or equal Today
+        $datetime = new \DateTime();
+        $days = Day::where('day', '>=', $datetime->format('Y-m-d'))->get();
+
+        return $days;
+    }
+
+    /**
+     * Function to Get Available Booking Time based on given Day
+     */
+    private function getBookingTime($day)
+    {
+        // in case i called function in this class
+        if ($day) {
+            
+            $times = Time::where('days_id', $day)->get();
+            return $times;
+
+        } else {
+            
+            return $request->all();
+        }
+        
+    }
+
+    /**
+     * Function to Get Available Booking Time based on given Day
+     */
+    public function dayTimes(Request $request)
+    {
+        // called with JSON
+        
+        // First, Get Day
+        $day = Day::where('day', $request->day)->first();
+
+        // Get Workers Count
+        $workersCount = Setting::where('settings_key', 'workers')->value('settings_value');
+
+        // Get Today to exclude times that after now
+        $datetime = new \DateTime();
+        $today = $datetime->format('Y-m-d');
+
+        // Get available times fro this day
+        $times = Time::where('days_id', $day->id)->where('booking_count', '<', $workersCount)->orderBy('id');
+        
+        if ($today == $request->day) {
+            $times->where('time_from', '>', $datetime->format('H:i:s'))->get();
+            
+        }
+
+        $times = $times->get();
+
+        return $times;
+    }
+
+    /**
+     * Caclulate Price
+     */
+    private function calculatePrice($timeID)
+    {
+        // Get Hour Price
+        $hourPrice = Setting::where('settings_key', 'hour_price')->value('settings_value');
+
+        // Get Number of Hours
+        $num_of_hours = Time::find($timeID) ? Time::find($timeID)->num_of_hours : 3;
+
+        // calc
+        return $hourPrice * $num_of_hours;
+    }
 
 
     /**

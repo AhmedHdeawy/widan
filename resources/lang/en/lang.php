@@ -3,6 +3,7 @@
 return [
 
     'maintenanceMode'           =>  'Maintenance Mode',
+    'welcomeDashboard'          =>  'Welcome to Website Dashboard',
     'websiteName'               =>  'Widan Cleaning Service',
     'home'	                    =>	'Home',
     'dashboard'                 =>  'Dashboard',
@@ -75,6 +76,8 @@ return [
     'profileHint'     =>  'Update Your Profile Easly. ',
     'hasNoUser' =>  "Don't have account ?",
     'hasUser' =>  'I have account',
+    'daysTimesExist'    =>  'this day and this time are exist',
+    'workers'   =>  'Workers Count',
 
     'createdSuccessfully'   =>  'Created Successfully',
     'updatedSuccessfully'   =>  'Updated Successfully',
@@ -98,7 +101,7 @@ return [
     'register'    =>  'Register',
     'latestArticle' =>  'Latest Articles',
     'copyRight' =>  'All Copyright Reserved to Widan',
-    'poweredBy' =>  'Designed & Devoleped By: HighDevs',
+    'poweredBy' =>  'Powerd By:',
     'whoWe' =>  'Who We Are',
     'contactUsTitle'  =>  'Contact Us',
     'contactUsMessage'  =>  'Send your Complaints or your Suggestion',
@@ -117,6 +120,8 @@ return [
     'street'      =>  'Street Name',
     'time_from'     =>  'Start Time',
     'time_to'     =>  'End Time',
+    'price'     =>  'Price',
+    'nom_of_hours'  =>  'Hours Number',
     'personalDetails'   =>  'Personal Details',
     'locationDetails'   =>  'Location Details',
     'bookingDetails'   =>  'Booking Details',
@@ -129,6 +134,12 @@ return [
     'Thu'       =>  'Thursday',
     'bookingDone'   =>  'Your request has been booked and you will be contacted as soon as possible',
     'selectService' =>  'Select Service',
+    'selectDayYouWant'  =>  'Choose the day(s) that suits you',
+    'availableTimes'  =>  'Available Times',
+    'mustSelectDay'     =>  'you must choose suits day to complete booking',
+    'mustSelectTime'    =>  'you must choose time from avaiable times to complete booking',
+    'invoiceDetails'    =>  'Invoice Details',
+    'notAvailableTimes'     =>  'there are no available times on this day, all are booked',
    
 
     /**
@@ -174,6 +185,8 @@ return [
     'google'  =>  'Google',
     'address'  =>  'Address',
     'about'  =>  'About Us',
+    'hour_price'    =>  'Hour Price',
+
     /**
      * Infos
      */

@@ -14,7 +14,7 @@ class Booking extends Model
      * @var array
      */
     protected $fillable = [
-    	'name', 'phone', 'email', 'city', 'building', 'unit', 'street', 'day', 'time_from', 'time_to', 'notes', 'status', 'service_id', 'user_id'
+    	'name', 'phone', 'email', 'city', 'building', 'unit', 'street', 'notes', 'status', 'price', 'service_id', 'user_id', 'days_id', 'times_id'
     ];
 
 
@@ -32,6 +32,23 @@ class Booking extends Model
     public function user()
     {
         return $this->belongsTo('App\User', 'user_id', 'id');
+    }
+
+    /**
+     * Day that belongs to Booking
+     */
+    public function day()
+    {
+        return $this->belongsTo('App\Models\Day', 'days_id', 'id');
+    }
+
+
+    /**
+     * Day that belongs to Booking
+     */
+    public function time()
+    {
+        return $this->belongsTo('App\Models\Time', 'times_id', 'id');
     }
 
 }

@@ -29,7 +29,7 @@ class BookingsController extends Controller
         'bookings.status'              => [ '=', request('status') ]
       ];
 
-      $query = Booking::groupBy('id');
+      $query = Booking::latest()->groupBy('id');
       
       $searchQuery = $this->handleSearch($query, $inputsArray);
 

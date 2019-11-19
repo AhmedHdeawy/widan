@@ -18,9 +18,11 @@
 	    <div class="carousel-item {{ $loop->first ? 'active' : '' }}">
 	      <img class="d-block w-100" src="{{ asset('uploads/sliders/' . $slider->sliders_img) }}" alt="{{ $slider->sliders_title }}">
 
-	      <div class="carousel-caption">
-		    <h4>{{ $slider->sliders_title }}</h4>
-		    <p>{{ $slider->sliders_desc }}</p>
+	      <div class="carousel-caption row align-items-center">
+		    <section class="col-12">		    	
+			    <h4>{{ $slider->sliders_title }}</h4>
+			    <p>{{ $slider->sliders_desc }}</p>
+		    </section>
 		  </div>
 	    </div>
 	    
@@ -40,6 +42,11 @@
 </div>
 
 {{-- Carousel / End --}}
+
+
+<h2 class="title my-5 text-center fb-500">
+	<a href="{{ route('booking') }}" class="btn btn-success btn-lg rounded-2 w-25"> {{ __('lang.bookingTitle') }} </a>
+</h2>
 
 
 <h2 class="title my-5 text-center fb-500">
@@ -144,13 +151,21 @@
 <div class="container contact-us mb-5 px-1 px-md-5">
 	<div class="row">
 		
-		<div class="col-12 col-md-6">
+		<div class="col-12 col-lg-6">
 			
-			<div class="mapouter"><div class="gmap_canvas"><iframe width="400" height="300" id="gmap_canvas" src="https://maps.google.com/maps?q=%D8%A7%D9%84%D8%AE%D9%84%D9%8A%D8%AC%20%D8%A7%D9%84%D8%AA%D8%AC%D8%A7%D8%B1%D9%8A%20%2C%20%D8%AF%D8%A8%D9%8A&t=&z=13&ie=UTF8&iwloc=&output=embed" frameborder="0" scrolling="no" marginheight="0" marginwidth="0"></iframe><a href="https://www.embedgooglemap.net/blog/20-off-discount-for-elegant-themes-divi-sale-coupon-code-2019/">divi discount code</a></div><style>.mapouter{position:relative;text-align:right;height:500px;width:600px;}.gmap_canvas {overflow:hidden;background:none!important;height:500px;width:600px;}</style></div>
+			<div class="mapouter">
+				<div class="gmap_canvas">
+					<iframe width="400" height="300" id="gmap_canvas" src="https://maps.google.com/maps?q=%D8%A7%D9%84%D8%AE%D9%84%D9%8A%D8%AC%20%D8%A7%D9%84%D8%AA%D8%AC%D8%A7%D8%B1%D9%8A%20%2C%20%D8%AF%D8%A8%D9%8A&t=&z=13&ie=UTF8&iwloc=&output=embed" frameborder="0" scrolling="no" marginheight="0" marginwidth="0">
+					</iframe>
+				</div>
+				<style>
+					.mapouter{position:relative;text-align:right;height:100%;width:600px;}.gmap_canvas {overflow:hidden;background:none!important;height:100%;width:600px;}
+				</style>
+			</div>
 
 		</div>
 
-		<div class="col-12 col-md-6 p-0 p-md-4">
+		<div class="col-12 col-lg-6 mt-5 mt-md-0 p-0 p-md-4">
 			
 			<ul class="list-group list-group-flush">
 			  <li class="list-group-item fb-400">
@@ -174,9 +189,10 @@
 			  </li>
 
 			   <li class="list-group-item fb-400">
-			  	<i class="mx-1 fa fa-google"></i>
-			  	<a target="_blank" href="{{ getSettingByKey('google')->settings_value }}">{{ getSettingByKey('google')->settings_value }}</a>
+			  	<i class="mx-1 fa fa-instagram"></i>
+			  	<a target="_blank" href="{{ getSettingByKey('instagram')->settings_value }}">{{ getSettingByKey('instagram')->settings_value }}</a>
 			  </li>
+			</ul>
 
 		</div>
 

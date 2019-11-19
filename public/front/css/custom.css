@@ -13,6 +13,24 @@ body[class="rtl"] {
 
 /* Navbar */
 
+.social-navbar .row {
+	border-bottom: 1px solid #ccc;
+}
+
+.social-navbar .nav-item .nav-link img {
+	transition: all .2s ease-in-out
+}
+
+.social-navbar .nav-item:hover .nav-link img {
+	 -webkit-box-shadow: 0px 5px 10px -5px rgba(0, 0, 0, 1);
+    -moz-box-shadow:    0px 5px 10px -5px rgba(0, 0, 0, 1);
+    box-shadow:         0px 5px 10px -5px rgba(0, 0, 0, 1);
+}
+
+.social-navbar .social-phone a:hover {
+	color: #00963F
+}
+
 nav {
 	border-bottom: 1px solid #FDDA02
 }
@@ -21,6 +39,10 @@ nav .nav-item .nav-link {
 	color: #000 !important;
 	font-size: 1.1rem
 }
+nav .nav-item .nav-link.btn,
+nav .nav-item .nav-link.btn:hover {
+	color: #FFF !important;
+}
 
 nav .nav-item .nav-link:hover,
 nav .nav-item .nav-link:active,
@@ -28,7 +50,8 @@ nav .nav-item .nav-link:focus {
 	color: #00963F !important
 }
 
-.rtl .navbar-nav .nav-item + .nav-item, [dir="rtl"] .navbar-nav .nav-item + .nav-item {
+.rtl .navbar-nav .nav-item + .nav-item, [dir="rtl"] .navbar-nav .nav-item + .nav-item,
+.rtl .navbar-nav .nav-item:first-child {
 	margin-right: auto;
 }
 
@@ -75,7 +98,8 @@ nav .nav-item .nav-link:focus {
 
 .carousel .carousel-caption {
 	background-color: rgba(0, 0, 0, .8);
-    margin-bottom: 12%
+    margin-bottom: 5%;
+    height: 60%;
 }
 
 
@@ -192,6 +216,42 @@ body[class="rtl"] .blogs .card .card-text {
 }
 
 
+/* Booking */
+.days-table tbody tr th {
+	cursor: pointer;
+	transition: all 0.2s ease-in-out;
+	font-size: .9rem;
+	height: 90px;
+	vertical-align: middle;
+}
+
+.times-table tbody tr th {
+	height: auto;
+}
+
+.days-table tbody tr th div {
+	color: #777
+}
+
+.days-table tbody tr th:hover {
+	background-color: #e6e6e6;
+}
+
+.days-table tbody tr th.choosed {
+	background-color: 	#28a745;
+}
+
+.days-table tbody tr th.choosed,
+.days-table tbody tr th.choosed * {
+	color: #FFF !important
+
+}
+
+.invoice-details {
+	border: 1px solid rgb(40, 167, 69);
+}
+
+
 /* Footer */
 footer {
 	background-color: #FFF;
@@ -200,6 +260,10 @@ footer {
 
 footer p {
 	font-size: .9rem
+}
+
+footer a:hover {
+	color: #00963F;
 }
 
 
@@ -299,8 +363,8 @@ footer p {
 		font-size: .7rem
 	}
 
-	.mapouter, .mapouter iframe {
-		width: 250px;
+	.mapouter, .mapouter iframe, .mapouter .gmap_canvas {
+		width: 100% !important;
 	}
 
 }

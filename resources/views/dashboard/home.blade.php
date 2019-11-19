@@ -8,7 +8,9 @@
 
 @section('content')
 
-<h1>Hi</h1>
+<h1 class="m-b-3">
+	{{ __('lang.welcomeDashboard') }}
+</h1>
 
 <div class="row dashboard-statistic">
 	
@@ -58,14 +60,14 @@
     </div>
 
     <div class="col-xs-6 col-lg-3">
-        <a href="{{ route('admin.admins.index') }}">        
+        <a href="{{ route('admin.bookings.index') }}">        
 	        <div class="card">
 	            <div class="card-block p-a-1 clearfix">
 	                <i class="icon-people bg-primary p-a-1 font-2xl m-r-1 {{ $currentLangDir == 'rtl' ? 'pull-right' : 'pull-left' }} "></i>
 	                <div class="h5 text-primary m-b-0 m-t-h">
-	                	{{ countRows('App\Admin') }}
+	                	{{ countRows('App\Models\Booking') }}
 	                </div>
-	                <div class="text-muted text-uppercase font-weight-bold font-xs">{{ __('lang.admins') }}</div>
+	                <div class="text-muted text-uppercase font-weight-bold font-xs">{{ __('lang.bookings') }}</div>
 	            </div>
 	        </div>
         </a>

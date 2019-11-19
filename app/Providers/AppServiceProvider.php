@@ -7,6 +7,7 @@ use Illuminate\Support\ServiceProvider;
 use Request;
 
 use App\Models\Language;
+use App\Models\Setting;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -51,8 +52,10 @@ class AppServiceProvider extends ServiceProvider
         $localeLangInverse = app()->getLocale() == 'ar' ? 'en' : 'ar'; 
         
         $currentLangDir = $languages->firstWhere('locale', $localeLang)->dir;
+
+        $hourPrice = Setting::where('settings_key', 'hour_price')->value('settings_value');
         
-        view()->share(compact('languages', 'segment', 'currentLangDir', 'localeLang', 'localeLangInverse'));
+        view()->share(compact('languages', 'segment', 'currentLangDir', 'localeLang', 'localeLangInverse', 'hourPrice'));
     }
 
     /**

@@ -4,10 +4,10 @@ namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class SettingRequest extends FormRequest
+class DayRequest extends FormRequest
 {
     /**
-     * Determine if the user is authorized to make this request.
+     * Determine if the admin is authorized to make this request.
      *
      * @return bool
      */
@@ -23,15 +23,11 @@ class SettingRequest extends FormRequest
      */
     public function rules()
     {
-        $rules = [
-            'settings_key' => 'required',
-            'settings_value'  =>  ''
+        $rules = [            
+            'day' => 'required|date',
+            'time_from' => 'required',
+            'time_to' => 'required|after:time_from',
         ];
-
-        if ($this->settings_key == 'workers' || $this->settings_key == 'hour_price') {
-            $rules['settings_value'] = 'numeric';
-        }
-        
 
         return $rules;
     }

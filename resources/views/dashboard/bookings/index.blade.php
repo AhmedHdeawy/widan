@@ -64,9 +64,6 @@
           <div class="card-header">
               <i class="fa fa-align-justify"></i> {{ __('lang.bookings') }}
 
-              <a href="{{ route('admin.bookings.create') }}" class="btn btn-success btn-create {{ $currentLangDir == 'rtl' ? 'pull-left' : 'pull-right' }}">
-                <i class="icon-plus"></i> {{ __('lang.create') }}
-              </a>
           </div>
 
           <div class="card-block">
@@ -96,7 +93,7 @@
 
                               <td> {{ $booking->name }} </td>
                               <td> {{ $booking->phone }} </td>
-                              <td> {{ $booking->day }} </td>
+                              <td> {{ $booking->day->day }} </td>
                               <td> 
                                   {{ $booking->city . ' - ' . $booking->building }}
                               </td>

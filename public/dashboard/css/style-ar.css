@@ -2901,7 +2901,13 @@ input[type="button"].btn-block {
 @media (max-width: 767px) {
   .navbar-toggleable-sm .navbar-nav .nav-item {
     float: none;
-    margin-right: 0; } }
+    margin-right: 0; } 
+
+    .login-dash-page .card-inverse {
+      width: 100% !important
+    }
+
+  }
 @media (min-width: 768px) {
   .navbar-toggleable-sm {
     display: block !important; } }

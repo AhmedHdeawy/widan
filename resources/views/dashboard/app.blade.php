@@ -7,7 +7,7 @@
   <meta name="robots" content="all,follow">
   <meta name="csrf-token" content="{{ csrf_token() }}">
 
-  <!-- <link rel="shortcut icon" href="assets/ico/favicon.png"> -->
+  <link rel="icon" href="{{ asset('front/images/logo-icon.png') }}" type="image/png" sizes="16x16">
 
   <title>{{ __('lang.widanAdminPanel') }}</title>
   
@@ -75,7 +75,8 @@
     {{-- Footer --}}
     <footer class="footer">
         <span class="pull-left">
-            <a href="/">HighDevs</a> &copy; {{ date('Y') }}
+            {{ __('lang.poweredBy') }}
+            <a href="https://eg.mostaql.com/u/AhmedHdeawy/portfolio" target="_blank">Ahmed Hdeawy</a>
         </span>
 
         <span class="pull-right">
