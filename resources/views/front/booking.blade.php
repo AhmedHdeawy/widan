@@ -250,7 +250,7 @@
                                     <tr>
                                        <th class="text-center" scope="col">{{ __('lang.day') }}</th>
                                        <th class="text-center" scope="col">{{ __('lang.time') }}</th>
-                                       <th class="text-center" scope="col">{{ __('lang.price') }}</th>
+                                       <th class="text-center" scope="col">{{ __('lang.price') }} {{ __('lang.withVat') }}</th>
                                     </tr>
                                   </thead>
 
@@ -431,8 +431,11 @@
 
         // Calculate Price
         let price = {{ $hourPrice }} * btnClicked.data('numhours');
+        let vat = 0.05 * price
+        let priceWithVat = vat + price;
+        
         // Show it to the price
-        invoiceDetails.find('.invoice-price').text(price);
+        invoiceDetails.find('.invoice-price').text(priceWithVat);
 
     });
 

@@ -2,6 +2,7 @@
 
 namespace App\Providers;
 
+use Laravel\Passport\Passport;
 use Illuminate\Support\Facades\Schema;
 use Illuminate\Support\ServiceProvider;
 use Request;
@@ -33,10 +34,10 @@ class AppServiceProvider extends ServiceProvider
 
         // check if App locale Exist in DB
         if (in_array($defaultFromUrl, $localesLangs)) {
-            
             app()->setlocale($defaultFromUrl);
 
         } else {
+
             app()->setlocale($defaultFromDB);
         }
         
@@ -52,7 +53,7 @@ class AppServiceProvider extends ServiceProvider
         $localeLangInverse = app()->getLocale() == 'ar' ? 'en' : 'ar'; 
         
         $currentLangDir = $languages->firstWhere('locale', $localeLang)->dir;
-
+        
         $hourPrice = Setting::where('settings_key', 'hour_price')->value('settings_value');
         
         view()->share(compact('languages', 'segment', 'currentLangDir', 'localeLang', 'localeLangInverse', 'hourPrice'));
@@ -65,6 +66,7 @@ class AppServiceProvider extends ServiceProvider
      */
     public function register()
     {
-        //
+        // Ignore Passport Migration
+        Passport::ignoreMigrations();
     }
 }

@@ -38,33 +38,6 @@ class InfosController extends Controller
       return view('dashboard.infos.index', compact('infos'));
     }
 
-
-    /**
-     * Goto the form for creating a new info.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-      return view('dashboard.infos.create');
-    }
-
-
-    /**
-     * Store a newly created info.
-     *
-     * @param  \App\Modules\Admin\Http\Requests\InfoRequest  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(InfoRequest $request)
-    {
-       // dd($request->all());
-        $info = Info::create($request->all());
-
-        return redirect()->route('admin.infos.index')->with('msg_success', __('lang.createdSuccessfully'));
-    }
-
-
     /**
      * Display the specified resource.
      *
@@ -75,6 +48,33 @@ class InfosController extends Controller
     {
         $showLang = $request->showLang;
         return view('dashboard.infos.show', compact('info', 'showLang'));
+    }
+
+
+    /**
+     * Show the form for editing the specified resource.
+     *
+     * @param  \App\Models\Info  $info
+     * @return \Illuminate\Http\Response
+     */
+    public function edit(Info $info)
+    {
+      return view('dashboard.infos.edit', compact('info'));
+    }
+
+    
+    /**
+     * Update the specified resource in storage.
+     *
+     * @param  \App\Modules\Admin\Http\Requests\InfoRequest  $request
+     * @param  \App\Models\Info  $info
+     * @return \Illuminate\Http\Response
+     */
+    public function update(InfoRequest $request, Info $info)
+    {
+        $info->update($request->all());
+
+        return redirect()->route('admin.infos.index')->with('msg_success', __('lang.updatedSuccessfully'));
     }
 
 }

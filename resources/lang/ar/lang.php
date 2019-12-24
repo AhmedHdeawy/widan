@@ -125,6 +125,7 @@ return [
     'time_from'     =>  'وقت البداية',
     'time_to'     =>  'وقت النهاية',
     'price'     =>  'السعر',
+    'withVat'   =>  'شامل الضريبة',
     'nom_of_hours'  =>  'عدد الساعات',
     'personalDetails'   =>  'البيانات الشخصية',
     'locationDetails'   =>  'بيانات المكان',

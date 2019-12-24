@@ -6,9 +6,15 @@
 
 <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
   <ol class="carousel-indicators">
-    <li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>
-    <li data-target="#carouselExampleIndicators" data-slide-to="1"></li>
-    <li data-target="#carouselExampleIndicators" data-slide-to="2"></li>
+  	@php
+  		$dataSlide = 0;
+  	@endphp
+  	@foreach($sliders as $slider)
+    	<li data-target="#carouselExampleIndicators" data-slide-to="{{ $dataSlide }}" class="{{ $loop->first ? 'active' : '' }}"></li>
+    	@php
+	  		$dataSlide++;
+	  	@endphp
+  	@endforeach
   </ol>
 
   <div class="carousel-inner">
@@ -100,44 +106,49 @@
 
 
 
-<h2 class="title my-5 text-center fb-500">
-	{{ __('lang.latestArticle') }}
-</h2>
 
 {{-- Blog  / Start --}}
 
-<div class="container blogs">
-	
-	<div class="row">
+@if($blogs->count() > 0)
+
+	<h2 class="title my-5 text-center fb-500">
+		{{ __('lang.latestArticle') }}
+	</h2>
+
+	<div class="container blogs">
 		
-		@foreach($blogs as $blog)
+		<div class="row">
+			
+			@foreach($blogs as $blog)
 
-			<div class="col-12 col-md-4">
-				<a href="{{ route('blog', $blog->id . '-' . make_slug($blog->blogs_title) ) }}">
-					<div class="card mb-5">
-					  <img class="card-img-top mb-2" src="{{ asset('uploads/blogs/' . $blog->blogs_logo) }}" alt="Card image cap">
-					  <div class="card-title p-2">
-					  		<h4> 
-					  			<a href="{{ route('blog', $blog->id . '-' . make_slug($blog->blogs_title) ) }}">
-					  				{{ str_limit(strip_tags($blog->blogs_title), 50, '...') }}
-					  			</a> 
-					  		</h4>
-					  </div>
-					  <div class="card-body p-2">
-					    <p class="card-text">
-					    	{{ str_limit(strip_tags($blog->blogs_desc), 170, '...') }}
-					    </p>
-					  </div>
-					</div>
-				</a>
+				<div class="col-12 col-md-4">
+					<a href="{{ route('blog', $blog->id . '-' . make_slug($blog->blogs_title) ) }}">
+						<div class="card mb-5">
+						  <img class="card-img-top mb-2" src="{{ asset('uploads/blogs/' . $blog->blogs_logo) }}" alt="Card image cap">
+						  <div class="card-title p-2">
+						  		<h4> 
+						  			<a href="{{ route('blog', $blog->id . '-' . make_slug($blog->blogs_title) ) }}">
+						  				{{ str_limit(strip_tags($blog->blogs_title), 50, '...') }}
+						  			</a> 
+						  		</h4>
+						  </div>
+						  <div class="card-body p-2">
+						    <p class="card-text">
+						    	{{ str_limit(strip_tags($blog->blogs_desc), 170, '...') }}
+						    </p>
+						  </div>
+						</div>
+					</a>
 
-			</div>
-		@endforeach
+				</div>
+			@endforeach
 
+
+		</div>
 
 	</div>
+@endif
 
-</div>
 
 {{-- Blogs  / End --}}
 
@@ -159,7 +170,7 @@
 					</iframe>
 				</div>
 				<style>
-					.mapouter{position:relative;text-align:right;height:100%;width:600px;}.gmap_canvas {overflow:hidden;background:none!important;height:100%;width:600px;}
+					.mapouter{position:relative;text-align:{{ $currentLangDir == 'rtl' ? 'right' : 'left' }};height:100%;width:600px;}.gmap_canvas {overflow:hidden;background:none!important;height:100%;width:600px;}
 				</style>
 			</div>
 

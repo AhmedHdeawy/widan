@@ -292,8 +292,16 @@ class HomeController extends Controller
         // Get Number of Hours
         $num_of_hours = Time::find($timeID) ? Time::find($timeID)->num_of_hours : 3;
 
-        // calc
-        return $hourPrice * $num_of_hours;
+        // price withoit VAT
+        $price = $hourPrice * $num_of_hours;
+
+        // VAT value
+        $vat = 0.05 * $price;
+
+        // With VAT
+        $priceWithVat = $vat + $price;
+
+        return $priceWithVat;
     }
 
 
